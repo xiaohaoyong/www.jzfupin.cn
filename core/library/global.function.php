@@ -306,6 +306,7 @@ function get_cache($cache_file)
     static $cacheid =array();
     if(!isset($cacheid[$cache_file])){
        $file = DATA_DIR . 'cache' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
+       var_dump($file);exit;
        if(is_file($file)) {
          $cacheid[$cache_file] = unserialize(str_replace("<?php if (!defined('IN_IAEWEB')) exit(); ?>","",file_get_contents($file)));
        }else{
