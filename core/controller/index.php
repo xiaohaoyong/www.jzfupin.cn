@@ -21,6 +21,7 @@ class index extends Base {
 		$category_dir = get_cache('category_dir');
 		$catid = $category_dir[strtolower($this->get('catdir'))];
 	    $category = $this->category_cache[$catid];
+	    var_dump($category);exit;
 		}
 	    if (empty($category)) {
 		    header('HTTP/1.1 404 Not Found');
