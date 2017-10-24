@@ -23,10 +23,8 @@ class index extends Base
                 $category_dir = get_cache('category_dir');
                 $catid = $category_dir[strtolower($this->get('catdir'))];
                 $category = $this->category_cache[$catid];
-
             }
-            var_dump($category);
-            exit;
+            var_dump($this->category_cache);exit;
             if (empty($category)) {
                 header('HTTP/1.1 404 Not Found');
                 $this->show_message('当前栏目不存在');
