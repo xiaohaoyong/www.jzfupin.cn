@@ -15,8 +15,6 @@ class index extends Base
     public function indexAction()
     {
         $member_model = get_cache('member_model');
-        var_dump($member_model);exit;
-
         if ($this->get('catdir') || $this->get('catid')) {
             $catid = (int)$this->get('catid');
             if (!empty($catid)) {
