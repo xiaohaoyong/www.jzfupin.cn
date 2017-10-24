@@ -1,0 +1,286 @@
+<?php include $this->_include('header.html'); ?>
+<script src="/assets/lib/webuploader/webuploader.nolog.min.js"></script>
+<script src="/assets/lib/webuploader/upload.js"></script>
+<script type="text/javascript">
+function ajaxPost(tab){
+	var modelid = <?php echo $member['modelid']; ?>;
+	var posturl = $("form#form_ask").attr('action');
+    var form_data = $("form#form_ask").serializeObject();
+    console.log(form_data);
+    $.ajax(posturl, {
+        type: 'POST',
+        data: form_data,
+        beforeSend:function(){
+          $.showLoading();
+        },
+        success: function (resInfo) {
+          $.hideLoading();
+          console.log(resInfo);
+          if(resInfo.code == 1) { 
+            $.toast("提交成功");
+            //window.location.href = resInfo.url;//跳转
+            if(modelid==7){ 
+            	setTimeout("location.href='/index.php?catid=23&tab="+tab+"';", 500);
+        	} else {
+        		setTimeout("location.href='/?id=<?php echo $member[cid]; ?>&tab="+tab+"';", 500);
+        	}
+          } else {
+            $.alert(resInfo.msg);
+          }
+        }
+  	});
+}
+
+function loadList(tab){
+	$.ajax('/?c=api&a=ajaxtab', {
+        type: 'GET',
+        data: {
+        	tab:tab
+        },
+        beforeSend:function(){
+          $.showLoading();
+        },
+        success: function (resInfo) {
+          $.hideLoading();
+          //console.log(resInfo);
+          $('#list_info').find('div.weui_panel_bd').eq(0).empty().html(resInfo);
+        }
+  	});
+}
+
+$(function(){
+
+		<?php if (isset($_GET['tab'])) { ?>
+			var tab_index = <?php echo $_GET['tab']; ?>;
+		<?php } else { ?>
+			var tab_index = 1;
+		<?php } ?>
+
+
+		if(tab_index > 0){ 
+			$('#list_nav').find('.swiper-slide a').eq(tab_index*1-1).addClass('open');
+			//$('#list_info').find('div.weui_panel_bd').eq(tab_index*1-1).show();
+			loadList(tab_index);
+		}
+
+		$('#list_nav').on('click','.swiper-slide a',function(){
+			$(".swiper-slide a.open").removeClass('open');
+			$(this).addClass('open');
+			var index = $(this).attr('data-id');
+			console.log(index);
+			loadList(index);
+		});
+
+
+
+	<?php if ($member[modelid] != 7) { ?>viewModel.changTarBar(2);<?php } ?>
+	webUploadH5($('#uplodImages .fileList'),$('#uplodImages .filePicker'),'data[files]',true);
+
+	$('.askdoc').on('click','.submit',function(){
+
+		$("input#catid").val($(this).attr('data-id'));
+
+		var content = $.trim($("#content").val());
+		var catid = Number($("input#catid").val());
+		var bar = "您的需求是否提交给专家？";
+		var msg = "提交给专家回答，要等专家有空了回复哦！";
+
+		if(catid == 6){ 
+			bar = "是否将问题提交给村医？";
+			msg = "提交给村医将会快速收到村医的答复";
+		}
+		if(catid == 9 || catid == 5){
+			bar = "您的提问是否提交给医生？";
+			msg = "医生看到后将会在第一时间给予回复！";
+		}
+
+		if (content == "") {
+	        $.alert('问题标题不能为空');
+			return false;
+        } else {
+        	$.confirm(msg,bar, function() {
+			  //$('#submit2').val(1);
+			  //$('#form_ask').submit();
+			  var tab = 3;
+			  if (catid == 8) tab = 2;
+			  ajaxPost(tab);
+	        }, function() {
+	           //$('#submit2').val(2);
+	        });
+	        return false;
+        }
+	});
+
+
+	// $('.askdoc').on('submit','#form_ask',function(){
+	// 	var content = $.trim($("#content").val());
+	// 	var catid = Number($("input#catid").val());
+	// 	console.log(catid);
+	// 	if(catid == 6){ 
+	// 		var bar = "是否将问题提交给村医？";
+	// 		var msg = "提交给村医将会快速收到村医的答复";
+	// 	} else {
+	// 		var bar = "您的需求是否提交给专家？";
+	// 		var msg = "提交给专家回答，要等专家有空了回复哦！";
+	// 	}
+	// 	if($('#submit2').val() == 1) return true;
+	// 	if (content == "") {
+	//         $.alert('问题标题不能为空');
+	// 		return false;
+ //        } else {
+ //        	$.confirm(msg,bar, function() {
+	// 		  $('#submit2').val(1);
+	// 		  //$('#form_ask').submit();
+	// 		  ajaxPost();
+	//         }, function() {
+	//            $('#submit2').val(2);
+	//         });
+	//         return false;
+ //        }
+	// });
+
+
+	$('.qywy').click(function(){
+		$.confirm("确定寻医问药？", function() {
+		  	var userid = <?php echo $member[userid]; ?>;
+		  	var uid = <?php echo $member[id]; ?>;
+		  	if(userid > 0) {
+		  		viewModel.telme(uid);
+		  	} else {
+		  		$.alert('你还没有辖区医生');
+		  	}
+		  }, function() {
+		  	
+		  });
+	});
+});
+
+</script>
+<?php if ($member[modelid] == 7) { ?><div class="weui_cells_title">答疑解惑</div><?php } ?>
+<div class="askdoc bg-w">
+<form action="/member<?php echo url('content/add'); ?>" method="post" id="form_ask">
+	<input type="hidden" class="button" value="2" name="submit2" id="submit2">
+	<input type="hidden" class="button" name="catid" id="catid">
+	<input type="hidden" class="button" value="1" name="ajax" id="ajax">
+<?php if ($member[modelid] != 7) {  $return = $this->_listdata("table=member id=$member[userid]"); extract($return); if (is_array($return))  foreach ($return as $key=>$v) {  $docphone = $v[phone];  } ?>
+	<div class="blank15"></div>
+	<div class="weui-row weui_btn_area weui-cell nomtop">
+		<div class="weui-col-33">
+	    	<a href="javascript:"><img src="/assets/images/tw.png" width="100%" /></a>
+		</div>
+		<div class="weui-col-33">
+	    	<a href="tel:<?php echo $docphone; ?>"><img src="/assets/images/dh.png" width="100%" /></a>
+		</div>
+		<div class="weui-col-33">
+	    	<a href="javascript:" class="qywy"><img src="/assets/images/yy.png" width="100%" /></a>
+		</div>
+	</div>
+	<!--div class="weui_cells weui_cells_form">
+	    <div class="weui_cell">
+	        <div class="weui_cell_bd weui_cell_primary">
+	            <input class="weui_input" name="data[title]" id="title" placeholder="问题的详细描述">
+	        </div>
+	    </div>
+	</div-->
+	<div class="weui_cells_title color-red">※ 请填写居民的年龄、性别以及相关症状</div>
+	<div class="weui_cells weui_cells_form nomtop nob">
+	    <div class="weui_cell nob" >
+	        <div class="weui_cell_bd weui_cell_primary">
+	            <textarea class="weui_textarea" style="border: 1px solid #e2e2e2;border-radius: 5px;" name="data[content]" id="content" placeholder="" rows="5"></textarea>
+	        </div>
+	    </div>
+	</div>
+	<div class="weui_cells_title">上传最近在医院或者诊所检查结果和处方等</div>
+	<div class="weui_cells weui_cells_form nomtop">
+	    <div class="weui_cell">
+	        <div class="weui_cell_bd weui_cell_primary">
+	            <div class="weui_uploader">
+	                <div class="weui_uploader_bd" id="uplodImages">
+	                    <ul class="weui_uploader_files fileList"></ul>
+	                    <div class="weui_uploader_input_wrp filePicker"> </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="weui-row weui_btn_area weui-cell">
+		<div class="weui-col-50">
+	    	<?php if ($member['userid'] > 0) { ?>
+	    		<a class="weui_btn weui_btn_info submit" href="javascript:;" data-id="6">直接问村医</a>
+	    	<?php } else { ?>
+	    		<a class="weui_btn weui_btn_info" href="javascript:;" onclick="$.alert('你还没有辖区医生');" data-id="6">直接问村医</a>
+	    	<?php } ?>
+		</div>
+		<div class="weui-col-50">
+	    	<a class="weui_btn weui_btn_info submit" href="javascript:;" data-id="5">快速问诊</a>
+		</div>
+	</div>
+	<div class="blank15"></div>
+<?php } else { ?>
+	<div class="weui_cells weui_cells_form nomtop nob">
+	    <div class="weui_cell nob">
+	        <div class="weui_cell_bd weui_cell_primary">
+	            <input class="weui_input" name="data[title]" id="title" placeholder="问题的详细描述">
+	        </div>
+	    </div>
+	</div>
+	<div class="weui_cells weui_cells_form nomtop nob">
+	    <div class="weui_cell nob" >
+	        <div class="weui_cell_bd weui_cell_primary">
+	            <textarea class="weui_textarea" style="border: 1px solid #e2e2e2;border-radius: 5px;" name="data[content]" id="content" placeholder="" rows="5"></textarea>
+	        </div>
+	    </div>
+	</div>
+	<div class="weui_cells weui_cells_form nomtop nob">
+	    <div class="weui_cell nob">
+	        <div class="weui_cell_bd weui_cell_primary">
+	            <div class="weui_uploader">
+	                <div class="weui_uploader_bd" id="uplodImages">
+	                    <ul class="weui_uploader_files fileList"></ul>
+	                    <div class="weui_uploader_input_wrp filePicker"> </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="weui-row weui_btn_area weui-cell">
+		<div class="weui-col-50">
+	    	<a class="weui_btn weui_btn_info submit" href="javascript:;" data-id="9">快速问诊</a>
+		</div>
+		<div class="weui-col-50">
+	    	<a class="weui_btn weui_btn_info submit" href="javascript:;" data-id="8">咨询专家</a>
+		</div>
+	</div>
+	<div class="blank15"></div>
+<?php } ?>
+</form>
+</div>
+<?php if ($member['modelid'] == 7) { ?>
+<a name="asklist"></a>
+<div class="weui_cells weui_panel_access">
+    <div class="weui-row weui-no-gutter col-border line2 panel_nav cou_nav swiper-container" id="list_nav">
+    	<div class="swiper-wrapper">
+		    <div class="swiper-slide text-c"><a href="javascript:;" data-id="1">居民问我</a></div>
+		    <div class="swiper-slide text-c"><a href="javascript:;" data-id="2">我问专家</a></div>
+		    <div class="swiper-slide text-c"><a href="javascript:;" data-id="3">我问医生</a></div>
+		    <div class="swiper-slide text-c"><a href="javascript:;" data-id="4">居民问诊</a></div>
+		</div>
+    </div>
+    <script type="text/javascript">
+    $(function(){
+    	$("#list_nav").swiper({
+    	    /*freeMode : true,*/
+    	    paginationClickable: true,
+            slidesPerView: 4,
+            spaceBetween: 0,
+            //initialSlide: 3	 
+        });
+    });
+    </script>
+</div>
+
+<div id="list_info">
+	<div class="weui_cells weui_panel_bd nomtop"></div>
+</div>
+
+<?php }  include $this->_include('footer.html'); ?>

@@ -1,0 +1,166 @@
+{template header.html}
+<script type="text/javascript">
+$(function(){
+	viewModel.selectUi("#sex","居民性别",[
+			{
+		      title: "不限",
+		      value: "0",
+		    },
+		    {
+		      title: "男",
+		      value: "1",
+		    },
+		    {
+		      title: "女",
+		      value: "2",
+		    }
+		]);
+	viewModel.selectUi("#pool","是否贫困",[
+			{
+		      title: "不限",
+		      value: "",
+		    },
+		    {
+		      title: "是",
+		      value: "1",
+		    },
+		    {
+		      title: "否",
+		      value: "0",
+		    }
+		]);
+	viewModel.selectUi("#condition","健康情况",["健康","亚健康", "疾病"]);
+	$("#tj").swiper({
+	    /*freeMode : true,*/
+	    paginationClickable: true,
+        slidesPerView: 4,
+
+	  	// slidesPerView: 4,
+    //     centeredSlides: true,
+    //     paginationClickable: true,
+        spaceBetween: 0
+	  });
+})
+</script>
+<style>
+.swiper-wrapper.text-sm{
+	height:36px;
+	line-height: 36px;
+}
+.swiper-wrapper .weui-col-25.swiper-slide {
+    width: 25%;
+    white-space:nowrap;  
+    text-align:center;
+}
+</style>
+<div class="user_list">
+		{php $all = 0;}
+		{php $poor = 0;}
+		{list catid=$catid userid=$member[id] iaeweb=1}
+		{php $all++;}
+		{if $v[poor]}{php $poor++;}{/if}
+		{/list}
+		<div class="swiper-container weui_panel weui_panel_access" id="tj">
+			<div class="swiper-wrapper text-sm">
+				<div class="weui-col-25 swiper-slide">总人数:{php echo $all;}</div>
+				<div class="weui-col-25 swiper-slide">贫困人数:{php echo $poor;}</div>
+				<div class="weui-col-25 swiper-slide">平均人数:0</div>
+				<div class="weui-col-25 swiper-slide">贫困平均人数:0</div>
+			</div>
+		</div>
+
+
+	<form action="index.php" method="get">
+		<div class="bd">
+		    <div class="weui_search_bar" id="search_bar">
+		        <div class="weui_search_outer">
+	          		<div class="weui_search_inner">
+						<input type="hidden" value="index" name="c">
+						<input type="hidden" value="searchjum" name="a">
+						<input type="hidden" value="{$modelid}" name="modelid">
+		                <i class="weui_icon_search"></i>
+		                <input type="search" name="kw" class="weui_search_input" id="search_input" placeholder="请输入您要查询的人姓名" required="">
+		                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+		            </div>
+		            <!--label for="search_input" class="weui_search_text" id="search_text" style="text-align:left;font-size:14px;">
+		                <i class="weui_icon_search" style="margin-left: 10px;padding: 4px 0;"></i> <span>请输入您要查询的人姓名</span>
+		            </label-->
+		        </div>
+		        <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+		        <a href="/member/index.php?c=content&a=family" class="weui_btn weui_btn_mini weui_btn_plain_primary add_user"> </a>
+		    </div>
+		</div>
+
+		<div class="weui-row weui-no-gutter col-border">
+			<div class="weui-col-33 color-gray">
+				<div class="weui_cell">
+			        <div class="weui_cell_bd weui_cell_primary">
+			          <input class="weui_input text-c" id="sex" name="sex" type="text" readonly="" placeholder="居民性别">
+			        </div>
+			        <i class="ion-ios-arrow-down"></i>
+			    </div>
+			</div>
+			<div class="weui-col-33 color-gray">
+				<div class="weui_cell">
+			        <div class="weui_cell_bd weui_cell_primary">
+			          <input class="weui_input text-c" id="pool" name="pool" type="text" readonly="" placeholder="是否贫困">
+			        </div>
+			        <i class="ion-ios-arrow-down"></i>
+			    </div>
+			</div>
+			<div class="weui-col-33 color-gray">
+				<div class="weui_cell">
+			        <div class="weui_cell_bd weui_cell_primary">
+			          <input class="weui_input text-c" id="condition" name="jkzk"  type="text" readonly="" placeholder="健康情况">
+			        </div>
+			        <i class="ion-ios-arrow-down"></i>
+			    </div>
+			</div>
+		</div>
+		<button style="display:none">0</button>
+	<form>
+
+		<div class="weui_panel weui_panel_access">
+	        <div class="weui_panel_bd">
+	            {list catid=$catid userid=$member[id] iaeweb=1 page=$page}
+	            {php $avatar="";}
+	            {php $age="";}
+	            {php $thumb="";}
+	            
+	            {php $age = !empty($v['birthday']) ?  birthday($v['birthday']) : $v['age'];}
+	            
+	            {if $v['uid'] > 0}
+	            	<a name="user{$v[uid]}"></a>
+	            	{list table=member id=$v[uid] return=u}
+	            		{php $avatar = !empty($u['avatar']) ? $u['avatar'] : "/assets/images/avatar.png";}
+	            	{/list}
+	            {/if}
+
+	            {php $thumb = !empty($v['thumb']) ? $v['thumb'] : $avatar;}
+
+	            {php $thumb = !empty($thumb) ? $thumb : "/assets/images/avatar.png";}
+
+
+
+	            <div class="weui_media_box weui_media_appmsg">
+	                <a class="weui_media_hd" href="{$v[url]}">
+	                   <div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$thumb});"></div>
+	                </a>
+	                <div class="weui_media_bd" style="cursor:pointer" onclick="window.location.href='{$v[url]}';">
+						<h4 class="weui_media_title">
+							{$v[title]}&nbsp;&nbsp;
+							<span class="text-sm color-gray">{$sex[$v[sex]]}&nbsp;{$age}岁</span>
+							{if $v[jkzk] == "疾病"}<span class="disease">慢</span>{/if}
+						</h4>
+    					<!--p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病</span></p-->
+						<p class="weui_media_desc">签约时间：{function.date('Y-m-d',$v['time'])}</p>
+						<!--p class="weui_media_desc">就诊时间：2016-3-9</p-->
+	                </div>
+	                {if $v['telme']} <a href="javascript:;" data-cid="{$v[id]}" data-phone="{$v['phone']}" class="weui_cell_ft tel_jm"><span class="weui_btn weui_btn_mini weui_btn_primary">用药指导</span></a>{/if}
+	            </div>
+	            {/list}
+		    </div>
+	    </div>
+	    <div class="pages">{$pagelist}</div>
+	</div>
+{template footer.html}

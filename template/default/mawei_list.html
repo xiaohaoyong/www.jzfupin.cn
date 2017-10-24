@@ -1,0 +1,113 @@
+{template header.html}
+<script type="text/javascript">
+$(function(){
+	viewModel.selectUi("#sex","居民性别",["不限","男", "女"]);
+	viewModel.selectUi("#pool","是否贫困",["不限","是", "否"]);
+	viewModel.selectUi("#condition","条件查找",["不限","1", "2"]);
+
+	$("#tj").swiper({
+	    paginationClickable: true,
+        slidesPerView: 4,
+        spaceBetween: 0
+	  });
+})
+</script>
+<style>
+.swiper-wrapper.text-sm{
+	height:36px;
+	line-height: 36px;
+}
+.swiper-wrapper .weui-col-25.swiper-slide {
+    width: 25%;
+    white-space:nowrap;  
+    text-align:center;
+}
+</style>
+<div class="user_list">
+		{php $all = 0;}
+		{php $poor = 0;}
+		{list catid=25 poor=1 userid=$member[id] iaeweb=1}
+		{php $all++;}
+		{if $v[poor]}{php $poor++;}{/if}
+		{/list}
+		<div class="swiper-container weui_panel weui_panel_access" id="tj">
+			<div class="swiper-wrapper text-sm">
+				<div class="weui-col-25 swiper-slide">总人数:{php echo $all;}</div>
+				<div class="weui-col-25 swiper-slide">贫困人数:{php echo $poor;}</div>
+				<div class="weui-col-25 swiper-slide">平均人数:0</div>
+				<div class="weui-col-25 swiper-slide">贫困平均人数:0</div>
+			</div>
+		</div>
+		<div class="bd">
+		    <div class="weui_search_bar" id="search_bar">
+		        <form class="weui_search_outer">
+		            <div class="weui_search_inner">
+		                <i class="weui_icon_search"></i>
+		                <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+		                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+		            </div>
+		            <label for="search_input" class="weui_search_text" id="search_text">
+		                <i class="weui_icon_search"></i>
+		                <span>搜索</span>
+		            </label>
+		        </form>
+		        <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+		    </div>
+		</div>
+		<div class="weui_panel weui_panel_access">
+			<div class="weui-row weui-no-gutter col-border">
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="sex" type="text" value="" readonly="" placeholder="居民性别">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="pool" type="text" value="" readonly="" placeholder="是否贫困">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="condition" type="text" value="" readonly="" placeholder="条件查找">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+			</div>
+	        <div class="weui_panel_bd weui_cells_access">
+	            {list catid=25 poor=1 iaeweb=1 userid=$member[id]}
+	            {php $thumb = !empty($v['thumb']) ? $v['thumb'] : "/assets/images/avatar.png";}
+	            {if $v['uid'] > 0}
+	            	<a name="user{$v[uid]}"></a>
+	            	{list table=member id=$v[uid] return=u}
+	            		{php $thumb = !empty($u['avatar']) ? $u['avatar'] : "/assets/images/avatar.png";}
+	            	{/list}
+	            {/if}
+	            <a href="{$v[url]}" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                   <div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$thumb});"></div>
+	                </div>
+	                <div class="weui_media_bd">
+										<h4 class="weui_media_title">
+												{$v[title]}&nbsp;&nbsp;
+												<span class="text-sm color-gray">{$sex[$v[sex]]}&nbsp;{$v[age]}岁</span>
+												<span class="disease">慢</span>
+										</h4>
+	                    <p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病</span></p>
+											<p class="weui_media_desc">签约时间：2016-3-7</p>
+											<p class="weui_media_desc">就诊时间：2016-3-9</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+	            {/list}
+		    </div>
+	    </div>
+	</div>
+{template footer.html}

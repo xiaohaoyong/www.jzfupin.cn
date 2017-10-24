@@ -1,0 +1,65 @@
+{template header.html}
+<div class="weui_cells_title">家庭成员</div>
+{list catid=$catid id=$familyid iaeweb=1 num=1}
+{php $avatar="";}
+{php $age="";}
+{php $thumb="";}
+{php $age = !empty($v['birthday']) ?  birthday($v['birthday']) : $v['age'];}
+{if $v['uid'] > 0}
+	<a name="user{$v[uid]}"></a>
+	{list table=member id=$v[uid] return=u}
+		{php $avatar = !empty($u['avatar']) ? $u['avatar'] : "/assets/images/avatar.png";}
+	{/list}
+{/if}
+{php $thumb = !empty($v['thumb']) ? $v['thumb'] : $avatar;}
+{php $thumb = !empty($thumb) ? $thumb : "/assets/images/avatar.png";}
+<div class="weui_cells weui_panel_access nomtop">
+	<div class="weui_panel_bd">
+        <div href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	        <div class="weui_media_hd">
+	           	<div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$thumb});"></div>
+	        </div>
+          <div class="weui_media_bd">
+            <h4 class="weui_media_title">
+            	{$v[title]}&nbsp;&nbsp;
+            	<span class="text-sm color-gray">{$sex[$v[sex]]}&nbsp;户主关系：户主本人</span>
+            </h4>
+            <!--p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p-->
+          </div>
+        </div>
+      </div>
+</div>
+{/list}
+
+
+{list catid=$catid familyid=$familyid iaeweb=1}
+{php $avatar="";}
+{php $age="";}
+{php $thumb="";}
+{php $age = !empty($v['birthday']) ?  birthday($v['birthday']) : $v['age'];}
+{if $v['uid'] > 0}
+	<a name="user{$v[uid]}"></a>
+	{list table=member id=$v[uid] return=u}
+		{php $avatar = !empty($u['avatar']) ? $u['avatar'] : "/assets/images/avatar.png";}
+	{/list}
+{/if}
+{php $thumb = !empty($v['thumb']) ? $v['thumb'] : $avatar;}
+{php $thumb = !empty($thumb) ? $thumb : "/assets/images/avatar.png";}
+<div class="weui_cells weui_panel_access nomtop">
+	<div class="weui_panel_bd">
+        <div href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	        <div class="weui_media_hd">
+	           	<div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$thumb});"></div>
+	        </div>
+          <div class="weui_media_bd">
+            <h4 class="weui_media_title">
+            	{$v[title]}&nbsp;&nbsp;
+            	<span class="text-sm color-gray">{$sex[$v[sex]]}&nbsp;户主关系：{$v[hzgx]}</span>
+            </h4>
+            <!--p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p-->
+          </div>
+        </div>
+      </div>
+</div>
+{/list}
+{template footer.html}

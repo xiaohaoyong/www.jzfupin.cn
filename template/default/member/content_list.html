@@ -1,0 +1,39 @@
+{template header.html}
+<script type="text/javascript">
+$(function(){
+  $('#user_nav').find('a').eq(2).addClass('open');
+})
+</script>
+{template member/user_header.html}
+<div class="weui_cells weui_panel_access nomtop">
+  <div class="weui_panel_bd">
+    {loop $list $v}
+    <div class="weui_media_box weui_media_text">
+      <h4 class="weui_media_title">
+        <span class="pull-right color-blue text-sm">{$cats[$v[catid]][catname]}</span>
+        {if $v['status']==0}<font color="#FF0000">[未审]</font>{/if}{$v[title]}
+      </h4>
+      {if !empty($v[filses])}
+      {php $p = unserialize($v[files]);}
+      <div class="weui-row">
+        {loop $p[fileurl] $key=>$t}
+        <div class="weui-col-33">
+          <img src="{$t}" width="100%" class="radius5">
+        </div>
+        {/loop}
+      </div>
+      {/if}
+      <p class="weui_media_desc">{$v[description]}</p>
+      <ul class="weui_media_info">
+        <li class="weui_media_info_meta">文字来源</li>
+        <li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+        <li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+        <li class="pull-right"><a href="{$v[url]}">展开 <i class="ion-ios-arrow-down"></i></a></li>
+      </ul>
+    </div>  
+    {/loop}
+  </div>
+</div>
+
+<div class="listpage">{$pagelist}</div>
+{template footer.html}

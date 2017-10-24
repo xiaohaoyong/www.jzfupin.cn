@@ -1,0 +1,171 @@
+<?php include $this->_include('header.html'); ?>
+<script src="/assets/lib/webuploader/webuploader.nolog.min.js"></script>
+<script src="/assets/lib/webuploader/upload.js"></script>
+<style type="text/css">
+    .upload-avatar {
+        position: static;
+    }
+    .upload-avatar .weui_uploader_input_wrp{
+        position: absolute;
+        width:100%;
+        margin: 0;
+    }
+    .webuploader-pick{
+        position: absolute;
+        width:100%;
+        margin: 0;
+        padding:0;
+        height:100px;
+    }
+</style>
+<script type="text/javascript">
+    $(function(){
+        var familyid = <?php echo $familyid; ?>;
+        if (familyid == 0) {
+            $('#hzgx').parents('div.weui_select_after').remove();
+        }
+        // $("#date").calendar({
+        //     value: ['1990-12-12'],
+        //     minDate: '1900-01-01',
+        //     maxDate: '<?php echo date('Y-m-d'); ?>'
+        // });
+        webUploadH5($('#avatarImages .fileList'),$('#avatarImages .filePicker'),'data[thumb]',false,
+            function(avatar){
+                //viewModel.changAvatar(avatar);
+            });
+        webUploadH5($('#uplodImages .fileList'),$('#uplodImages .filePicker'),'data[images]',true);
+        $('.complete').on('click','#getsmscode',viewModel.getSmsCode);
+
+        //读取身份证
+        $('input#cardid')
+            .attr('maxlength',18)
+            .attr('onkeyup',"value=value.replace(\/\[\^\\d\|x\|X\]\/g,'')")
+            .attr('onbeforepaste',"clipboardData.setData('text',clipboardData.getData('text').replace(\/\[\^\\d\|x\|X\]\/g,''))");
+        $('input#cardid').bind('input propertychange', function() {
+            if($.trim($(this).val()).length > 14) {
+                var ic = $.trim($(this).val());
+                var birth = ic.substring(6, 10) + "-" + ic.substring(10, 12) + "-" + ic.substring(12, 14);  
+                $('#birthday').val(birth);
+            }
+        });
+
+
+        $('a#submit').click(function(){
+            var posturl = window.location.href;
+            var form_data = $("form#add_form").serializeObject();
+            console.log(form_data);
+            $.ajax(posturl, {
+                type: 'POST',
+                data: form_data,
+                beforeSend:function(){
+                  $.showLoading();
+                },
+                success: function (resInfo) {
+                  $.hideLoading();
+                  console.log(resInfo);
+                  if(resInfo.code == 1) { 
+                    $.toast("添加成功");
+                    //window.location.href = resInfo.url;//跳转
+                    setTimeout("location.href='/member/index.php?c=content&a=family';", 500);
+                  } else {
+                    $.alert(resInfo.msg);
+                  }
+                }
+              });
+        });
+
+        //贫穷自能
+        $('input[name="data[poor]"]').click(function(){
+            //var checked = $(this).pop('checked');
+            var value = $(this).val();
+            var select = $('#pksx').parents('div.weui_select_after');
+            var select2 = $('#pkxz').parents('div.weui_select_after');
+            var select3 = $('#pkyy').parents('div.weui_select_after');
+            if(value == 1) {
+                select.show();
+                select2.show();
+                select3.show();
+            } else if(value == 0) {
+                select.hide();
+                select2.hide();
+                select3.hide();
+            }
+        });
+
+    })
+</script>
+<div class="complete">
+<form action="" method="post" id="add_form">
+    <input type="hidden" value="保存" name="submit">
+    <input type="hidden" value="1" name="ajax">
+    <?php if ($familyid == 0) { ?><input type="hidden" value="本人" name="hzgx"><?php } ?>
+    <div style="display:none"><select name="data[catid]"><?php echo $category; ?></select></div>
+
+    <div class="weui_cells weui_cells_access weui_cells_form nomtop">
+        <div class="top_tabbar">
+            <div class="weui-row weui-no-gutter">
+                <a href="/member/?c=content&a=qrcode" class="weui-col-50">扫码添加</a>
+                <div class="weui-col-50 open">手动添加</div>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd weui_cell_primary"><label class="weui_label">头像</label></div>
+            <div class="upload-avatar">
+                <div class="weui_uploader_bd" id="avatarImages">
+                    <ul class="weui_uploader_files fileList">
+                        <li class="weui_uploader_file" style="background-image:url(<?php echo $member[thumb]; ?>);background-color:#ccc">
+                            <input type="hidden" name="data[thumb]" value="<?php echo $member[thumb]; ?>" />
+                        </li>
+                    </ul>
+                    <div class="weui_uploader_input_wrp filePicker"> </div>
+                </div>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </div>
+
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">姓名 <font color="red">*</font></label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" name="data[title]" value="<?php echo $member[title]; ?>" placeholder="请输入姓名" <?php echo $dis_input; ?>>
+            </div>
+        </div>
+
+        <?php echo $fields; ?>
+
+    </div>
+
+    <div class="weui_btn_area">
+        <a href="javascript:;" class="weui_btn weui_btn_primary" id="submit">添加</a>
+    </div>
+</form>
+</div>
+
+<div class="mainbody" style="display:none">
+		<div class="page bg">
+			<div class="content_info">
+                <form action="" method="post">
+                <?php if ($data) { ?><input type="hidden" value="<?php echo $data[catid]; ?>" name="data[catid]"><?php } ?>
+                <table width="100%" class="table_form" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                <tr>
+                    <th width="120"><font color="red">*</font>&nbsp;栏目：</th>
+                    <td><select name="data[catid]"><?php echo $category; ?></select><a href="<?php echo HTTP_REFERER; ?>">返回重选</a></td>
+                </tr>
+				<tr>
+					<th><font color="red">*</font>&nbsp;标题：</th>
+					<td><input type="text" class="input-text" size="50" id="title" value="<?php echo $data['title']; ?>" name="data[title]" onBlur="ajaxtitle()">
+					<div class="onShow" id="title_text"></div></td>
+				</tr>
+                <?php echo $fields; ?>
+                <tr>
+                    <th style="border:none">&nbsp;</th>
+                    <td style="border:none"><input type="submit" class="button" value="提 交" name="submit"></td>
+                </tr>
+                </tbody>
+                </table>
+                </form>
+		    </div>
+		   <div class="blank10 clear"></div>		
+		</div>
+</div>
+<?php include $this->_include('footer.html'); ?>

@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>拉手医疗</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="/assets/lib/weui.min.css">
+	<link rel="stylesheet" href="/assets/css/jquery-weui.css">
+	<link rel="stylesheet" href="/assets/css/ionicons.min.css">
+	<link rel="stylesheet" href="/assets/css/mobile.css">
+	<script src="/assets/lib/jquery-2.1.4.js"></script>
+	<script src="/assets/lib/router.min.js"></script>
+	<script src="/assets/js/jquery-weui.js"></script>
+	<script src="/assets/js/swiper.js"></script>
+</head>
+<body ontouchstart>
+	<div id="container"></div>
+	<div id="tabbar">
+		<div class="weui_tabbar">
+        <a href="javascript:;" class="weui_tabbar_item">
+          <div class="weui_tabbar_icon">
+            <i class="ion-ios-home-outline"></i>
+          </div>
+          <p class="weui_tabbar_label">首页</p>
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item">
+          <div class="weui_tabbar_icon">
+            <i class="ion-ios-medkit-outline"></i>
+          </div>
+          <p class="weui_tabbar_label">培训信息</p>
+        </a>
+        <a href="javascript:;" class="weui_tabbar_item">
+          <div class="weui_tabbar_icon">
+            <i class="ion-ios-person-outline"></i>
+          </div>
+          <p class="weui_tabbar_label">个人中心</p>
+        </a>
+      </div>
+	</div>
+
+
+	<!--首页-->
+	<script type="text/html" id="tpl_home">
+		<div class="weui_cells weui_cells_access">
+			<a class="weui_cell" href="javascript:;">
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <p>请您尽快提供认证，加入我们大家庭！</p>
+	            </div>
+	            <div class="weui_cell_ft"></div>
+	        </a>
+		</div>
+
+		<div class="weui_panel weui_panel_access">
+	        <div class="weui_panel_bd weui_cells_access">
+	            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+	                <div class="weui_media_bd">
+	                    <h4 class="weui_media_title">辖区居民</h4>
+	                    <p class="weui_media_desc">医生随时了解病人档案，方便快捷。</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+	            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+	                <div class="weui_media_bd">
+	                    <h4 class="weui_media_title"><span class="text-sm color-blue pull-right">本周待随诊人数:16人</span>问诊专家</h4>
+	                    <p class="weui_media_desc">医生随时了解病人档案，方便快捷。</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+		        <div class="warp weui_media_box">
+			        <div class="weui-row">
+				      <div class="weui-col-50">
+				      	<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&fm=80" width="100%" class="radius5" />
+				      </div>
+				      <div class="weui-col-50">
+				      	<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&fm=80" width="100%" class="radius5" />
+				      </div>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
+
+	    <div class="weui_cells_title">扶贫专栏</div>
+
+	    <div class="weui_panel weui_panel_access">
+	        <div class="weui_panel_bd">
+	            <div class="weui_media_box weui_media_text">
+	                <h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+	                <p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+	                <ul class="weui_media_info">
+	                    <li class="weui_media_info_meta">文字来源</li>
+	                    <li class="weui_media_info_meta">2016-05-20</li>
+	                    <li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="warp">
+		        <div class="weui-row">
+			      <div class="weui-col-33">
+			      	<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+			      </div>
+			      <div class="weui-col-33">
+			      	<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+			      </div>
+			      <div class="weui-col-33">
+			      	<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+			      </div>
+			    </div>
+		    </div>
+		    <div class="weui-row weui-no-gutter col-border">
+		    	<div class="weui-col-33 text-c color-gray">
+		    		<i class="ion-ios-heart-outline"></i> 180
+		    	</div>
+		    	<div class="weui-col-33 text-c color-gray">
+		    		<i class="ion-ios-analytics-outline"></i> 180
+		    	</div>
+		    	<div class="weui-col-33 text-c color-gray">
+		    		<i class="ion-ios-chatbubble-outline"></i> 180
+		    	</div>
+		    </div>
+	    </div>
+	</script>
+
+
+	<!--登录-->
+	<script type="text/html" id="tpl_login">
+		<div class="hd">
+				<h2 class="page_title"><img src="/assets/images/loginbg.png" class="logo"/></h2>
+		</div>
+			<div class="weui_cells weui_cells_form">
+	        <div class="weui_cell weui_vcode">
+	            <div class="weui_cell_bd weui_vcode weui_cell_primary">
+	                <input class="weui_input" type="number" pattern="[0-9]*" placeholder="输入手机号">
+	            </div>
+	            <div class="weui_cell_ft">
+	            	<a class="weui_btn weui_btn_default" href="javascript:">获取验证码</a>
+	            </div>
+	        </div>
+	        <div class="weui_cell">
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <input class="weui_input" type="number" placeholder="请输入验证码">
+	            </div>
+	        </div>
+	        <div class="weui_cell weui_cell_switch">
+	            <div class="weui_cell_ft weui_cell_hd">
+	                <input class="weui_switch" type="checkbox" checked style="zoom: 0.8;">
+	            </div>
+	            <div class="weui_cell_hd weui_cell_primary">
+	            	<p class="weui_cells_title">勾选代表您同意《村医对口帮扶协议》</p>
+	            </div>
+	        </div>
+	    </div>
+
+		<div class="weui_btn_area">
+	        <a class="weui_btn weui_btn_primary" href="javascript:">登录</a>
+	    </div>
+	</script>
+
+	<!--完善资料-->
+	<script type="text/html" id="tpl_complete">
+		<div class="weui_cells weui_cells_form">
+	        <div class="weui_cell">
+	            <div class="weui_cell_hd weui_cell_primary"><label class="weui_label">头像</label></div>
+	            <div class="weui_cell_ft">
+	            	<div class="upload-avatar">
+	            		<img class="avatar_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="" />
+		                <div class="weui_uploader_input_wrp">
+		                    <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="" class="radius100">
+		                </div>
+	                </div>
+	            </div>
+	        </div>
+			<div class="weui_cell">
+	            <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <input class="weui_input" placeholder="请输入姓名">
+	            </div>
+	        </div>
+	        <div class="weui_cell weui_cell_select weui_select_after">
+	            <div class="weui_cell_hd">
+	                <label for="" class="weui_label">性别</label>
+	            </div>
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <select class="weui_select" name="select2">
+	                    <option value="1">男</option>
+	                    <option value="2">女</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="weui_cell">
+	            <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号">
+	            </div>
+	        </div>
+					<div class="weui_cell">
+	            <div class="weui_cell_hd"><label class="weui_label">身份证</label></div>
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <input class="weui_input" type="number" placeholder="请输入身份证">
+	            </div>
+	        </div>
+					<div class="weui_cell">
+			        <div class="weui_cell_hd"><label for="date" class="weui_label">出生日期</label></div>
+			        <div class="weui_cell_bd weui_cell_primary">
+			          <input class="weui_input" id="date" type="text" value="" placeholder="请选择您的出生日期" readonly="">
+			        </div>
+					</div>
+					<div class="weui_cell">
+	            <div class="weui_cell_hd"><label class="weui_label">专长疾病</label></div>
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <input class="weui_input" placeholder="请输入专长疾病">
+	            </div>
+	        </div>
+	    </div>
+		<div class="weui_cells_title">医生简介</div>
+		<div class="weui_cells weui_cells_form">
+			<div class="weui_cell">
+				<div class="weui_cell_bd weui_cell_primary">
+					<textarea class="weui_textarea" placeholder="请输入医生简介" rows="3"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="weui_cells weui_cells_form">
+		        <div class="weui_cell">
+		            <div class="weui_cell_bd weui_cell_primary">
+		                <div class="weui_uploader">
+		                    <div class="weui_uploader_hd weui_cell">
+		                        <div class="weui_cell_bd weui_cell_primary">证书上传</div>
+		                    </div>
+		                    <div class="weui_uploader_bd">
+		                        <ul class="weui_uploader_files">
+		                            <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+		                            <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+		                                <div class="weui_uploader_status_content">
+		                                    <i class="weui_icon_warn"></i>
+		                                </div>
+		                            </li>
+		                            <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
+		                                <div class="weui_uploader_status_content">50%</div>
+		                            </li>
+		                        </ul>
+		                        <div class="weui_uploader_input_wrp">
+		                            <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		</div>
+		<a href="javascript:;" class="weui_btn weui_btn_primary">下一步</a>
+	</script>
+
+	<!--添加居民-->
+	<script type="text/html" id="tpl_add_user">
+		<div class="weui_cells weui_cells_form nomtop">
+		  <div class="top_tabbar">
+		    <div class="weui-row weui-no-gutter">
+		      <div class="weui-col-50">扫码添加</div>
+		      <div class="weui-col-50 open">手动添加</div></div>
+		  </div>
+		  <div class="weui_cell">
+		    <div class="weui_cell_hd weui_cell_primary">
+		      <label class="weui_label">头像</label></div>
+		    <div class="weui_cell_ft">
+		      <div class="upload-avatar">
+		        <img class="avatar_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="" />
+		        <div class="weui_uploader_input_wrp">
+		          <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="" class="radius100"></div>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="weui_cell">
+		    <div class="weui_cell_hd">
+		      <label class="weui_label">户主姓名</label></div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <input class="weui_input" placeholder="请输入户主姓名"></div>
+		  </div>
+		  <div class="weui_cell">
+		    <div class="weui_cell_hd">
+		      <label class="weui_label">姓名</label></div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <input class="weui_input" placeholder="请输入姓名"></div>
+		  </div>
+		  <div class="weui_cell weui_cell_select weui_select_after">
+		    <div class="weui_cell_hd">
+		      <label for="" class="weui_label">性别</label></div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <select class="weui_select" name="select2">
+		        <option value="1">男</option>
+		        <option value="2">女</option></select>
+		    </div>
+		  </div>
+		  <div class="weui_cell">
+		    <div class="weui_cell_hd">
+		      <label class="weui_label">手机号</label></div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号"></div>
+		  </div>
+		  <div class="weui_cell">
+		    <div class="weui_cell_hd">
+		      <label class="weui_label">身份证</label></div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <input class="weui_input" type="number" placeholder="请输入身份证"></div>
+		  </div>
+		  <div class="weui_cell">
+		    <div class="weui_cell_hd">
+		      <label for="time" class="weui_label">出生日期</label></div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <input class="weui_input" id="time" type="text" value="" readonly=""></div>
+		  </div>
+		  <div class="weui_cell weui_cell_select weui_select_after">
+		    <div class="weui_cell_hd">
+		      <label for="" class="weui_label">户主关系</label></div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <select class="weui_select" name="select2">
+		        <option value="1">请选择于户主关系</option>
+		        <option value="2">夫妻</option>
+		        <option value="3">儿子</option>
+		        <option value="4">女儿</option>
+		        <option value="5">其他</option></select>
+		    </div>
+		  </div>
+		  <div class="weui_cell weui_cell_select weui_select_after">
+		    <div class="weui_cell_hd">
+		      <label for="" class="weui_label">健康情况</label></div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <select class="weui_select" name="select2">
+		        <option value="1">请选择健康情况</option>
+		        <option value="2">健康</option>
+		        <option value="3">亚健康</option>
+		        <option value="4">慢性病</option>
+		        <option value="5">其他</option></select>
+		    </div>
+		  </div>
+		</div>
+		<div class="weui_cells weui_cells_form">
+		  <div class="weui_cell">
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <div class="weui_uploader">
+		        <div class="weui_uploader_hd weui_cell">
+		          <div class="weui_cell_bd weui_cell_primary">疾病诊断</div></div>
+		        <div class="weui_uploader_bd">
+		          <ul class="weui_uploader_files">
+		            <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+		            <div class="weui_uploader_status_content">
+		              <i class="weui_icon_warn"></i>
+		            </div>
+		            </li>
+		            <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
+		              <div class="weui_uploader_status_content">50%</div></li>
+		          </ul>
+		          <div class="weui_uploader_input_wrp">
+		            <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple=""></div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="weui_btn_area">
+		  <a class="weui_btn weui_btn_primary" href="javascript:">添加</a></div>
+		<div class="weui_cells weui_cells_access">
+		  <a class="weui_cell" href="javascript:;">
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <p>妻子：戈尔西娜 36岁</p>
+		    </div>
+		    <div class="weui_cell_ft"></div>
+		  </a>
+		  <a class="weui_cell" href="javascript:;">
+		    <div class="weui_cell_bd weui_cell_primary">
+		      <p>儿子：戈尔西娜 16岁</p>
+		    </div>
+		    <div class="weui_cell_ft"></div>
+		  </a>
+		</div>
+	</script>
+
+
+
+	<!--辖区居民-->
+	<script type="text/html" id="tpl_user_list">
+		<div class="weui_panel weui_panel_access ">
+			<div class="weui-row weui-no-gutter weui_cell">
+				<div class="weui-col-25">总人数:100</div>
+				<div class="weui-col-25">贫困人数:60</div>
+				<div class="weui-col-25">平均人数:100</div>
+				<div class="weui-col-25">贫困平均:100</div>
+			</div>
+		</div>
+		<div class="bd">
+		    <div class="weui_search_bar" id="search_bar">
+		        <form class="weui_search_outer">
+		            <div class="weui_search_inner">
+		                <i class="weui_icon_search"></i>
+		                <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+		                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+		            </div>
+		            <label for="search_input" class="weui_search_text" id="search_text">
+		                <i class="weui_icon_search"></i>
+		                <span>搜索</span>
+		            </label>
+		        </form>
+		        <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+		    </div>
+		</div>
+		<div class="weui_panel weui_panel_access">
+			<div class="weui-row weui-no-gutter col-border">
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="sex" type="text" value="" readonly="" placeholder="居民性别">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="pool" type="text" value="" readonly="" placeholder="是否贫困">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="condition" type="text" value="" readonly="" placeholder="条件查找">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+			</div>
+	        <div class="weui_panel_bd weui_cells_access">
+	            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+	                <div class="weui_media_bd">
+										<h4 class="weui_media_title">
+												小麦兜&nbsp;&nbsp;
+												<span class="text-sm color-gray">男&nbsp;66岁</span>
+												<span class="disease">慢</span>
+										</h4>
+	                    <p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病</span></p>
+											<p class="weui_media_desc">签约时间：2016-3-7</p>
+											<p class="weui_media_desc">就诊时间：2016-3-9</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+	            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+	                <div class="weui_media_bd">
+	                    <h4 class="weui_media_title"><span class="text-sm color-blue pull-right">本周待随诊人数:16人</span>问诊专家</h4>
+	                    <p class="weui_media_desc">医生随时了解病人档案，方便快捷。</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+							<a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+	                <div class="weui_media_bd">
+	                    <h4 class="weui_media_title">
+													小麦兜&nbsp;&nbsp;
+													<span class="text-sm color-gray">男&nbsp;66岁</span>
+													<span class="disease">慢</span>
+											</h4>
+	                    <p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病</span></p>
+											<p class="weui_media_desc">签约时间：2016-3-7</p>
+											<p class="weui_media_desc">就诊时间：2016-3-9</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+	            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+	                <div class="weui_media_bd">
+	                    <h4 class="weui_media_title"><span class="text-sm color-blue pull-right">本周待随诊人数:16人</span>问诊专家</h4>
+	                    <p class="weui_media_desc">医生随时了解病人档案，方便快捷。</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+		    </div>
+	    </div>
+	</script>
+
+	<!--问诊专家-->
+	<script type="text/html" id="tpl_wzzj">
+		<div class="weui_cells_title">答疑解惑</div>
+		<div class="weui_cells weui_cells_form">
+	        <div class="weui_cell">
+	            <div class="weui_cell_bd weui_cell_primary">
+	                <textarea class="weui_textarea" placeholder="请输入问题详细描述" rows="5"></textarea>
+	            </div>
+	        </div>
+			<div class="weui_cell">
+	          <div class="weui_cell_bd weui_cell_primary">
+	              <div class="weui_uploader">
+	                  <div class="weui_uploader_bd">
+	                      <div class="weui_uploader_input_wrp">
+	                          <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+	                      </div>
+	                  </div>
+	              </div>
+	          </div>
+	          <div class="weui_cell_bd color-gray"><span class="weui_cells_title">点击上传相关图片</span></div>
+			</div>
+			<div class="weui-row weui_btn_area weui-cell">
+				<div class="weui-col-50">
+		        	<a class="weui_btn weui_btn_primary" href="javascript:">快速问诊</a>
+				</div>
+				<div class="weui-col-50">
+		        	<a class="weui_btn weui_btn_primary" href="javascript:">咨询专家</a>
+				</div>
+			</div>
+			<div class="blank15"></div>
+		</div>
+		<div class="weui_cells_title">辖区问诊</div>
+	    <div class="weui_search_bar" id="search_bar">
+	        <form class="weui_search_outer">
+	            <div class="weui_search_inner">
+	                <i class="weui_icon_search"></i>
+	                <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+	                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+	            </div>
+	            <label for="search_input" class="weui_search_text" id="search_text">
+	                <i class="weui_icon_search"></i>
+	                <span>搜索</span>
+	            </label>
+	        </form>
+	        <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+	    </div>
+		<div class="weui_cells weui_cells_form nomtop">
+			<div class="weui-row weui-no-gutter col-border line2 panel_nav">
+				<a href="javascript:;" class="weui-col-25 open">居民问我</a>
+				<a href="javascript:;" class="weui-col-25">我问专家</a>
+				<a href="javascript:;" class="weui-col-25">我问医生</a>
+				<a href="javascript:;" class="weui-col-25">居民问诊</a>
+			</div>
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="weui_panel weui_panel_access">
+					<div class="weui_panel_bd">
+							<div class="weui_media_box weui_media_text">
+									<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+									<div class="warp">
+										<div class="weui-row">
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+									</div>
+								</div>
+									<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+									<ul class="weui_media_info">
+											<li class="weui_media_info_meta">文字来源</li>
+											<li class="weui_media_info_meta">2016-05-20</li>
+											<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+									</ul>
+							</div>
+					</div>
+			</div>
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</script>
+
+
+	<!--慢危病控-->
+	<script type="text/html" id="tpl_mwbk">
+		<div class="weui_panel weui_panel_access ">
+			<div class="weui-row weui-no-gutter weui_cell">
+				<div class="weui-col-25">总人数:100</div>
+				<div class="weui-col-25">贫困人数:60</div>
+				<div class="weui-col-25">平均人数:100</div>
+				<div class="weui-col-25">贫困平均:100</div>
+			</div>
+		</div>
+		<div class="bd">
+		    <div class="weui_search_bar" id="search_bar">
+		        <form class="weui_search_outer">
+		            <div class="weui_search_inner">
+		                <i class="weui_icon_search"></i>
+		                <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+		                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+		            </div>
+		            <label for="search_input" class="weui_search_text" id="search_text">
+		                <i class="weui_icon_search"></i>
+		                <span>搜索</span>
+		            </label>
+		        </form>
+		        <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+		    </div>
+		</div>
+		<div class="weui_panel weui_panel_access">
+			<div class="weui-row weui-no-gutter col-border">
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="sex" type="text" value="" readonly="" placeholder="居民性别">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="pool" type="text" value="" readonly="" placeholder="是否贫困">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="condition" type="text" value="" readonly="" placeholder="条件查找">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+			</div>
+	        <div class="weui_panel_bd weui_cells_access">
+	            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+									<div class="weui_media_bd">
+	                    <h4 class="weui_media_title">
+													小麦兜&nbsp;&nbsp;
+													<span class="text-sm color-gray">男&nbsp;66岁</span>
+													<span class="disease">慢</span>
+											</h4>
+	                    <p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病、脑血栓、腰间盘突出</span></p>
+											<p class="weui_media_desc">随诊总次数：16</p>
+											<p class="weui_media_desc">本年度已随诊次数：1</p>
+											<p class="weui_media_desc">用药情况：长期服用</p>
+											<p class="weui_media_desc">劳动情况：不能劳动</p>
+											<p class="weui_media_desc">上次随诊时间：2016-3-7</p>
+											<p class="color-blue">下次随诊时间：2016-3-7</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+	            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+									<div class="weui_media_bd">
+	                    <h4 class="weui_media_title">
+													小麦兜&nbsp;&nbsp;
+													<span class="text-sm color-gray">男&nbsp;66岁</span>
+													<span class="disease">慢</span>
+											</h4>
+	                    <p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病、脑血栓、腰间盘突出</span></p>
+											<p class="weui_media_desc">随诊总次数：16</p>
+											<p class="weui_media_desc">本年度已随诊次数：1</p>
+											<p class="weui_media_desc">用药情况：长期服用</p>
+											<p class="weui_media_desc">劳动情况：不能劳动</p>
+											<p class="weui_media_desc">上次随诊时间：2016-3-7</p>
+											<p class="weui_media_desc">下次随诊时间：2016-3-7</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+							<a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+	                <div class="weui_media_bd">
+	                    <h4 class="weui_media_title">
+													小麦兜&nbsp;&nbsp;
+													<span class="text-sm color-gray">男&nbsp;66岁</span>
+													<span class="disease">慢</span>
+											</h4>
+	                    <p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病、脑血栓、腰间盘突出</span></p>
+											<p class="weui_media_desc">随诊总次数：16</p>
+											<p class="weui_media_desc">本年度已随诊次数：1</p>
+											<p class="weui_media_desc">用药情况：长期服用</p>
+											<p class="weui_media_desc">劳动情况：不能劳动</p>
+											<p class="weui_media_desc">上次随诊时间：2016-3-7</p>
+											<p class="weui_media_desc">下次随诊时间：2016-3-7</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+	            <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+	                <div class="weui_media_hd">
+	                    <img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+	                </div>
+									<div class="weui_media_bd">
+	                    <h4 class="weui_media_title">
+													小麦兜&nbsp;&nbsp;
+													<span class="text-sm color-gray">男&nbsp;66岁</span>
+													<span class="disease">慢</span>
+											</h4>
+	                    <p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病、脑血栓、腰间盘突出</span></p>
+											<p class="weui_media_desc">随诊总次数：16</p>
+											<p class="weui_media_desc">本年度已随诊次数：1</p>
+											<p class="weui_media_desc">用药情况：长期服用</p>
+											<p class="weui_media_desc">劳动情况：不能劳动</p>
+											<p class="weui_media_desc">上次随诊时间：2016-3-7</p>
+											<p class="weui_media_desc">下次随诊时间：2016-3-7</p>
+	                </div>
+	                <span class="weui_cell_ft"></span>
+	            </a>
+		    </div>
+	    </div>
+	</script>
+
+
+	<!--患者详细页1-->
+	<script type="text/html" id="tpl_patient01">
+		<div class="weui_cells nomtop">
+			<div class="weui_msg">
+				<h2 class="page_title">
+					<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="" width="64">
+				</h2>
+				<h2 class="weui_msg_title">操作成功</h2>
+				<p class="weui_msg_desc">内容详情，可根据实际需要安排</p>
+				<div class="weui_btn_area nomtop">
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+				</div>
+			</div>
+			<div class="weui_cell">
+			  <div class="weui_cell_bd weui_cell_primary"><p>户主</p></div>
+			  <div class="weui_cell_ft">张三是</div>
+			</div>
+			<div class="weui_cell">
+	      		<div class="weui_cell_bd weui_cell_primary"><p>身份证</p></div>
+	    		<div class="weui_cell_ft">837918718789172981</div>
+			</div>
+			<div class="weui_cell">
+	      		<div class="weui_cell_bd weui_cell_primary"><p>联系电话</p></div>
+	    		<div class="weui_cell_ft">1212123888</div>
+			</div>
+		</div>
+		<div class="weui_cells weui_cells_form">
+			<div class="weui-row weui-no-gutter col-border line2 panel_nav">
+				<a href="javascript:;" class="weui-col-25 open">体检报告</a>
+				<a href="javascript:;" class="weui-col-25">穿戴设备</a>
+				<a href="javascript:;" class="weui-col-25">问诊列表</a>
+				<a href="javascript:;" class="weui-col-25">随诊列表</a>
+			</div>
+			<div class="weui_btn_area mg10">
+				<a class="weui_btn weui_btn_primary" href="javascript:">新增体检报告</a>
+			</div>
+			<div class="weui_media_box weui_media_text">
+				<h4 class="weui_media_title">
+					医疗扶贫政策落地 困难群众如浴阳光
+				</h4>
+				<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！
+				如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！如果
+				不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+			</div>
+			<div class="weui_cell">
+				<div class="weui_cell_primary">
+					<div class="weui_uploader">
+						<div class="weui_uploader_bd">
+							<div class="weui_uploader_input_wrp">
+								<input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="color-gray"><span class="weui_cells_title">点击上传相关图片</span></div>
+			</div>
+			<div class="weui_btn_area mg10">
+				<a class="weui_btn weui_btn_primary" href="javascript:">提交</a>
+			</div>
+		</div>
+		<div class="weui_panel weui_panel_access">
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<!--患者详细页2-->
+	<script type="text/html" id="tpl_patient02">
+		<div class="weui_cells nomtop">
+			<div class="weui_msg">
+				<h2 class="page_title">
+					<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="" width="64">
+				</h2>
+				<h2 class="weui_msg_title">操作成功</h2>
+				<p class="weui_msg_desc">内容详情，可根据实际需要安排</p>
+				<div class="weui_btn_area nomtop">
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+				</div>
+			</div>
+			<div class="weui_cell">
+			  <div class="weui_cell_bd weui_cell_primary"><p>户主</p></div>
+			  <div class="weui_cell_ft">张三是</div>
+			</div>
+			<div class="weui_cell">
+	      		<div class="weui_cell_bd weui_cell_primary"><p>身份证</p></div>
+	    		<div class="weui_cell_ft">837918718789172981</div>
+			</div>
+			<div class="weui_cell">
+	      		<div class="weui_cell_bd weui_cell_primary"><p>联系电话</p></div>
+	    		<div class="weui_cell_ft">1212123888</div>
+			</div>
+		</div>
+
+		<div class="weui_cells weui_cells_form">
+			<div class="weui-row weui-no-gutter col-border line2 panel_nav">
+				<a href="javascript:;" class="weui-col-25">体检报告</a>
+				<a href="javascript:;" class="weui-col-25 open">穿戴设备</a>
+				<a href="javascript:;" class="weui-col-25">问诊列表</a>
+				<a href="javascript:;" class="weui-col-25">随诊列表</a>
+			</div>
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</script>
+
+	<!--患者详细页3-->
+	<script type="text/html" id="tpl_patient03">
+		<div class="weui_cells nomtop">
+			<div class="weui_msg">
+				<h2 class="page_title">
+					<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="" width="64">
+				</h2>
+				<h2 class="weui_msg_title">操作成功</h2>
+				<p class="weui_msg_desc">内容详情，可根据实际需要安排</p>
+				<div class="weui_btn_area nomtop">
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+				</div>
+			</div>
+			<div class="weui_cell">
+			  <div class="weui_cell_bd weui_cell_primary"><p>户主</p></div>
+			  <div class="weui_cell_ft">张三是</div>
+			</div>
+			<div class="weui_cell">
+	      		<div class="weui_cell_bd weui_cell_primary"><p>身份证</p></div>
+	    		<div class="weui_cell_ft">837918718789172981</div>
+			</div>
+			<div class="weui_cell">
+	      		<div class="weui_cell_bd weui_cell_primary"><p>联系电话</p></div>
+	    		<div class="weui_cell_ft">1212123888</div>
+			</div>
+		</div>
+		<div class="weui_cells weui_cells_form">
+			<div class="weui-row weui-no-gutter col-border line2 panel_nav">
+				<a href="javascript:;" class="weui-col-25">体检报告</a>
+				<a href="javascript:;" class="weui-col-25">穿戴设备</a>
+				<a href="javascript:;" class="weui-col-25 open">问诊列表</a>
+				<a href="javascript:;" class="weui-col-25">随诊列表</a>
+			</div>
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="weui_panel_bd">
+					<div class="weui_media_box weui_media_text">
+							<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+							<div class="warp">
+								<div class="weui-row">
+								<div class="weui-col-33">
+									<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+								</div>
+								<div class="weui-col-33">
+									<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+								</div>
+								<div class="weui-col-33">
+									<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+								</div>
+							</div>
+						</div>
+							<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+							<ul class="weui_media_info">
+									<li class="weui_media_info_meta">文字来源</li>
+									<li class="weui_media_info_meta">2016-05-20</li>
+									<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+							</ul>
+					</div>
+			</div>
+		</div>
+	</script>
+
+
+	<!--患者详细页4-->
+	<script type="text/html" id="tpl_patient04">
+		<div class="weui_cells nomtop">
+			<div class="weui_msg">
+				<h2 class="page_title">
+					<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="" width="64">
+				</h2>
+				<h2 class="weui_msg_title">操作成功</h2>
+				<p class="weui_msg_desc">内容详情，可根据实际需要安排</p>
+				<div class="weui_btn_area nomtop">
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+				</div>
+			</div>
+			<div class="weui_cell">
+			  <div class="weui_cell_bd weui_cell_primary"><p>户主</p></div>
+			  <div class="weui_cell_ft">张三是</div>
+			</div>
+			<div class="weui_cell">
+	      		<div class="weui_cell_bd weui_cell_primary"><p>身份证</p></div>
+	    		<div class="weui_cell_ft">837918718789172981</div>
+			</div>
+			<div class="weui_cell">
+	      		<div class="weui_cell_bd weui_cell_primary"><p>联系电话</p></div>
+	    		<div class="weui_cell_ft">1212123888</div>
+			</div>
+		</div>
+		<div class="weui_cells weui_cells_form">
+			<div class="weui-row weui-no-gutter col-border line2 panel_nav">
+				<a href="javascript:;" class="weui-col-25">体检报告</a>
+				<a href="javascript:;" class="weui-col-25">穿戴设备</a>
+				<a href="javascript:;" class="weui-col-25">问诊列表</a>
+				<a href="javascript:;" class="weui-col-25 open">随诊列表</a>
+			</div>
+			<div class="weui_btn_area">
+				<a class="weui_btn weui_btn_primary" href="javascript:">新增随诊记录</a>
+			</div>
+			<div class="weui_media_box weui_media_text">
+				<h4 class="weui_media_title">
+					医疗扶贫政策落地 困难群众如浴阳光
+				</h4>
+				<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！
+				如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！如果
+				不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+			</div>
+			<div class="weui_btn_area">
+				<a class="weui_btn weui_btn_primary" href="javascript:">提交</a>
+			</div>
+		</div>
+		<div class="weui_panel weui_panel_access">
+			<div class="weui_panel_bd">
+					<div class="weui_media_box weui_media_text">
+							<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+
+							<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+							<ul class="weui_media_info">
+									<li class="weui_media_info_meta">文字来源</li>
+									<li class="weui_media_info_meta">2016-05-20</li>
+									<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+									<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+							</ul>
+					</div>
+			</div>
+		</div>
+	</script>
+
+
+	<!--意见反馈-->
+	<script type="text/html" id="tpl_yjfk">
+		<div class="weui_cells_title">手机号（选填）</div>
+		<div class="weui_cells weui_cells_form">
+			<div class="weui_cell">
+				<div class="weui_cell_bd weui_cell_primary">
+						<input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号">
+				</div>
+			</div>
+		</div>
+		<div class="weui_cells_title">您的建议（500字以内）</div>
+		<div class="weui_cells weui_cells_form">
+			<div class="weui_cell">
+					<div class="weui_cell_bd weui_cell_primary">
+							<textarea class="weui_textarea" placeholder="请输入建议内容" rows="15"></textarea>
+					</div>
+			</div>
+		</div>
+		<div class="weui_btn_area">
+	        <a class="weui_btn weui_btn_primary" href="javascript:" id="showTooltips">提交</a>
+	    </div>
+	</script>
+
+
+	<!--预防宣教-->
+	<script type="text/html" id="tpl_yfxj">
+		<div class="weui_search_bar" id="search_bar">
+				<form class="weui_search_outer">
+						<div class="weui_search_inner">
+								<i class="weui_icon_search"></i>
+								<input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+								<a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+						</div>
+						<label for="search_input" class="weui_search_text" id="search_text">
+								<i class="weui_icon_search"></i>
+								<span>搜索</span>
+						</label>
+				</form>
+				<a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+		</div>
+		<div class="weui_cells weui_cells_form nomtop">
+			<div class="weui-row weui-no-gutter col-border line2 panel_nav">
+				<a href="javascript:;" class="weui-col-25 open">预防宣教</a>
+				<a href="javascript:;" class="weui-col-25">培训学习</a>
+				<a href="javascript:;" class="weui-col-25">扶贫专栏</a>
+				<a href="javascript:;" class="weui-col-25">用药常识</a>
+			</div>
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="weui_panel weui_panel_access">
+					<div class="weui_panel_bd">
+							<div class="weui_media_box weui_media_text">
+									<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+									<div class="warp">
+										<div class="weui-row">
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+									</div>
+								</div>
+									<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+									<ul class="weui_media_info">
+											<li class="weui_media_info_meta">文字来源</li>
+											<li class="weui_media_info_meta">2016-05-20</li>
+											<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+									</ul>
+							</div>
+					</div>
+			</div>
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="weui_cells_title">温馨提示：您的评论最终会显示在居民端的医生说中哦</div>
+		<div class="weui_cells weui_cells_form">
+			<div class="weui_cell">
+					<div class="weui_cell_bd weui_cell_primary">
+							<textarea class="weui_textarea" placeholder="请输入评论内容" rows="6"></textarea>
+					</div>
+			</div>
+		</div>
+		<div class="weui_btn_area">
+				<a class="weui_btn weui_btn_primary" href="javascript:" id="showTooltips">提交</a>
+		</div>
+	</script>
+
+
+	<!--培训学习-->
+	<script type="text/html" id="tpl_pxxx">
+		<div class="weui_search_bar" id="search_bar">
+			<form class="weui_search_outer">
+					<div class="weui_search_inner">
+							<i class="weui_icon_search"></i>
+							<input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+							<a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+					</div>
+					<label for="search_input" class="weui_search_text" id="search_text">
+							<i class="weui_icon_search"></i>
+							<span>搜索</span>
+					</label>
+			</form>
+			<a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+		</div>
+		<div class="weui_cells weui_cells_form nomtop">
+			<div class="weui-row weui-no-gutter col-border line2 panel_nav">
+				<a href="javascript:;" class="weui-col-25 open">预防宣教</a>
+				<a href="javascript:;" class="weui-col-25">培训学习</a>
+				<a href="javascript:;" class="weui-col-25">扶贫专栏</a>
+				<a href="javascript:;" class="weui-col-25">用药常识</a>
+			</div>
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="weui_panel weui_panel_access">
+					<div class="weui_panel_bd">
+							<div class="weui_media_box weui_media_text">
+									<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+									<div class="warp">
+										<div class="weui-row">
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+										<div class="weui-col-33">
+											<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+										</div>
+									</div>
+								</div>
+									<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+									<ul class="weui_media_info">
+											<li class="weui_media_info_meta">文字来源</li>
+											<li class="weui_media_info_meta">2016-05-20</li>
+											<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+									</ul>
+							</div>
+					</div>
+			</div>
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">已回复</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+						<li class="pull-right"><a href="javascript:;">展开 <i class="ion-ios-arrow-down"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</script>
+
+
+
+	<!--个人中心-->
+	<script type="text/html" id="tpl_grzx">
+		<div class="weui_cells weui_cells_access nomtop">
+			<a class="weui_cell" href="javascript:;">
+				<div class="weui_cell_bd weui_cell_primary">
+						<p>请您尽快提供认证，加入我们大家庭！</p>
+				</div>
+				<div class="weui_cell_ft"></div>
+			</a>
+		</div>
+		<div class="weui_cells nomtop">
+			<div class="weui_msg">
+				<h2 class="page_title">
+					<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="" width="64">
+				</h2>
+				<h2 class="weui_msg_title">操作成功</h2>
+				<p class="weui_msg_desc">内容详情，可根据实际需要安排</p>
+				<div class="weui_btn_area nomtop">
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+				</div>
+			</div>
+		</div>
+		<div class="weui_cells weui-row weui-no-gutter col-border panel_nav nomtop line12 grzx_like">
+			<a href="javascript:;" class="weui-col-25">100<span class="text-sm block">被赞次数</span></a>
+			<a href="javascript:;" class="weui-col-25">100<span class="text-sm block">倒彩次数</span></a>
+			<a href="javascript:;" class="weui-col-25">100<span class="text-sm block">评论次数</span></a>
+			<a href="javascript:;" class="weui-col-25">100<span class="text-sm block">评价次数</span></a>
+		</div>
+		<div class="weui_cells nomtop">
+		    <div class="weui_grids">
+		        <a href="#/button" class="weui_grid">
+		            <div class="weui_grid_icon">
+		                <i class="ion-compose"></i>
+		            </div>
+		            <p class="weui_grid_label">
+		                个人资料
+		            </p>
+		        </a>
+		        <a href="#/cell" class="weui_grid">
+		            <div class="weui_grid_icon">
+		                <i class="ion-chatbubbles"></i>
+		            </div>
+		            <p class="weui_grid_label">
+		                问答列表
+		            </p>
+		        </a>
+		        <a href="#/dialog" class="weui_grid">
+		            <div class="weui_grid_icon">
+		                <i class="ion-android-clipboard"></i>
+		            </div>
+		            <p class="weui_grid_label">
+		                随诊记录
+		            </p>
+		        </a>
+		        <a href="#/progress" class="weui_grid">
+		            <div class="weui_grid_icon">
+		                <i class="ion-ios-book-outline"></i>
+		            </div>
+		            <p class="weui_grid_label">
+		                宣教阅读
+		            </p>
+		        </a>
+						<a href="#/toast" class="weui_grid">
+								<div class="weui_grid_icon">
+										<i class="ion-ios-list-outline"></i>
+								</div>
+								<p class="weui_grid_label">
+										帮扶规则
+								</p>
+						</a>
+		        <a href="#/msg" class="weui_grid">
+		            <div class="weui_grid_icon">
+		                <i class="ion-paintbrush"></i>
+		            </div>
+		            <p class="weui_grid_label">
+		                意见反馈
+		            </p>
+		        </a>
+
+		    </div>
+		</div>
+	</script>
+
+
+
+	<!--详细页面-->
+	<script type="text/html" id="tpl_xxym">
+		<div class="weui_panel weui_article">
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<section>
+		                <h1>医疗扶贫政策落地 困难群众</h1>
+		                <p>如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+		                <p>如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+		                <p>如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+		                <p>如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+						<div class="weui-row">
+							<div class="weui-col-33">
+								<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+							</div>
+							<div class="weui-col-33">
+								<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+							</div>
+							<div class="weui-col-33">
+								<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+							</div>
+						</div>
+		            </section>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<i class="ion-android-favorite-outline"></i> 128
+						<i class="ion-thumbsdown"></i> 98
+						<li class="weui_media_info_meta weui_media_info_meta_extra">分享</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</script>
+
+
+	<!--相关协议-->
+	<script type="text/html" id="tpl_xgxy">
+		<div class="weui_panel weui_panel_access">
+			<div class="weui_panel_bd">
+				<div class="weui_media_box weui_media_text">
+					<section>
+			            <h1>医疗扶贫政策落地 困难群众</h1>
+			            <p>如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊</p>
+						<p>如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊</p>
+						<p>如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊</p>
+						<p>如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊</p>
+			        </section>
+				</div>
+			</div>
+		</div>
+	</script>
+
+
+	<!--宣教阅读-->
+	<script type="text/html" id="tpl_xjyd">
+		<div class="weui_cells weui_panel_access nomtop">
+			<div class="weui_panel_bd">
+
+				home<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">扶贫政策</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+					<div class="weui-row">
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+					</div>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">扶贫动态</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+					<div class="weui-row">
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+					</div>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+					<div class="weui-row">
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+					</div>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+
+			</div>
+		</div>
+	</script>
+
+	<!--问答列表-->
+	<script type="text/html" id="tpl_wdlb">
+		<div class="weui_cells weui_panel_access nomtop">
+			<div class="weui_panel_bd">
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">扶贫政策</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+					<div class="weui-row">
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+					</div>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">
+						<span class="pull-right color-blue text-sm">扶贫动态</span>
+						医疗扶贫政策落地 困难群众如浴阳光
+					</h4>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+					<div class="weui-row">
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+					</div>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				<div class="weui_media_box weui_media_text">
+					<h4 class="weui_media_title">医疗扶贫政策落地 困难群众如浴阳光</h4>
+					<div class="weui-row">
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+						<div class="weui-col-33">
+							<img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=1086883600,4080170484&amp;fm=80" width="100%" class="radius5">
+						</div>
+					</div>
+					<p class="weui_media_desc">如果不是党的政策好，这场大病我哪有钱来医啊！”谈起自己的生病遭遇，家住叙永县枧槽乡木溪村的田大爷，倍感欣慰啊！</p>
+					<ul class="weui_media_info">
+						<li class="weui_media_info_meta">文字来源</li>
+						<li class="weui_media_info_meta">2016-05-20</li>
+						<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+					</ul>
+				</div>
+
+				
+			</div>
+		</div>
+	</script>
+
+	<!--随诊记录-->
+	<script type="text/html" id="tpl_szjl">
+		<div class="bd">
+		    <div class="weui_search_bar" id="search_bar">
+		        <form class="weui_search_outer">
+		            <div class="weui_search_inner">
+		                <i class="weui_icon_search"></i>
+		                <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required="">
+		                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+		            </div>
+		            <label for="search_input" class="weui_search_text" id="search_text">
+		                <i class="weui_icon_search"></i>
+		                <span>搜索</span>
+		            </label>
+		        </form>
+		        <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+		    </div>
+		</div>
+		<div class="weui_panel weui_panel_access nomtop">
+			<div class="weui-row weui-no-gutter col-border">
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="sex" type="text" value="" readonly="" placeholder="居民性别">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="pool" type="text" value="" readonly="" placeholder="是否贫困">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+				<div class="weui-col-33 color-gray">
+					<div class="weui_cell">
+				        <div class="weui_cell_bd weui_cell_primary">
+				          <input class="weui_input text-c" id="condition" type="text" value="" readonly="" placeholder="条件查找">
+				        </div>
+				        <i class="ion-ios-arrow-down"></i>
+				    </div>
+				</div>
+			</div>
+			<div class="weui_panel_bd weui_cells_access">
+					<a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+							<div class="weui_media_hd">
+									<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+							</div>
+							<div class="weui_media_bd">
+									<h4 class="weui_media_title">
+											小麦兜&nbsp;&nbsp;
+											<span class="text-sm color-gray">男&nbsp;66岁</span>
+											<span class="disease">慢</span>
+									</h4>
+									<p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病、脑血栓、腰间盘突出</span></p>
+									<p class="weui_media_desc">随诊总次数：16</p>
+									<p class="weui_media_desc">本年度已随诊次数：1</p>
+									<p class="weui_media_desc">用药情况：长期服用</p>
+									<p class="weui_media_desc">劳动情况：不能劳动</p>
+									<p class="weui_media_desc">上次随诊时间：2016-3-7</p>
+									<p class="color-blue">下次随诊时间：2016-3-7</p>
+							</div>
+							<span class="weui_cell_ft"></span>
+					</a>
+					<a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+							<div class="weui_media_hd">
+									<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+							</div>
+							<div class="weui_media_bd">
+									<h4 class="weui_media_title">
+											小麦兜&nbsp;&nbsp;
+											<span class="text-sm color-gray">男&nbsp;66岁</span>
+											<span class="disease">慢</span>
+									</h4>
+									<p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病、脑血栓、腰间盘突出</span></p>
+									<p class="weui_media_desc">随诊总次数：16</p>
+									<p class="weui_media_desc">本年度已随诊次数：1</p>
+									<p class="weui_media_desc">用药情况：长期服用</p>
+									<p class="weui_media_desc">劳动情况：不能劳动</p>
+									<p class="weui_media_desc">上次随诊时间：2016-3-7</p>
+									<p class="weui_media_desc">下次随诊时间：2016-3-7</p>
+							</div>
+							<span class="weui_cell_ft"></span>
+					</a>
+					<a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+							<div class="weui_media_hd">
+									<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+							</div>
+							<div class="weui_media_bd">
+									<h4 class="weui_media_title">
+											小麦兜&nbsp;&nbsp;
+											<span class="text-sm color-gray">男&nbsp;66岁</span>
+											<span class="disease">慢</span>
+									</h4>
+									<p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病、脑血栓、腰间盘突出</span></p>
+									<p class="weui_media_desc">随诊总次数：16</p>
+									<p class="weui_media_desc">本年度已随诊次数：1</p>
+									<p class="weui_media_desc">用药情况：长期服用</p>
+									<p class="weui_media_desc">劳动情况：不能劳动</p>
+									<p class="weui_media_desc">上次随诊时间：2016-3-7</p>
+									<p class="weui_media_desc">下次随诊时间：2016-3-7</p>
+							</div>
+							<span class="weui_cell_ft"></span>
+					</a>
+					<a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+							<div class="weui_media_hd">
+									<img class="weui_media_appmsg_thumb radius100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">
+							</div>
+							<div class="weui_media_bd">
+									<h4 class="weui_media_title">
+											小麦兜&nbsp;&nbsp;
+											<span class="text-sm color-gray">男&nbsp;66岁</span>
+											<span class="disease">慢</span>
+									</h4>
+									<p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病、脑血栓、腰间盘突出</span></p>
+									<p class="weui_media_desc">随诊总次数：16</p>
+									<p class="weui_media_desc">本年度已随诊次数：1</p>
+									<p class="weui_media_desc">用药情况：长期服用</p>
+									<p class="weui_media_desc">劳动情况：不能劳动</p>
+									<p class="weui_media_desc">上次随诊时间：2016-3-7</p>
+									<p class="weui_media_desc">下次随诊时间：2016-3-7</p>
+							</div>
+							<span class="weui_cell_ft"></span>
+					</a>
+				</div>
+	    </div>
+	</script>
+
+
+	<!--详细页-->
+	<script type="text/html" id="tpl_detial">
+		000000
+	</script>
+
+
+	<!--详细页-->
+	<script type="text/html" id="tpl_detial">
+		000000
+	</script>
+
+
+
+	<script src="/assets/js/mobile.js"></script>
+</body>
+</html>

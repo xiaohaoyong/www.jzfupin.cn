@@ -1,0 +1,33 @@
+<?php
+if (!defined('IN_IAEWEB')) exit();
+return array (
+  'site_name' => '宜医平台',
+  'site_theme' => 'default',
+  'site_mobile' => '1',
+  'site_title' => '宜医平台',
+  'site_keywords' => '',
+  'site_description' => '',
+  'site_status' => '1|正常
+2|头条
+3|推荐
+0|未审核',
+  'site_download_image' => '1',
+  'site_watermark' => '0',
+  'site_watermark_pos' => '5',
+  'site_autolink' => '1',
+  'member_modelid' => '7',
+  'wechat_login' => '1',
+  'appid' => 'wx4999ebcbf6451579',
+  'appsecret' => '811d3c03c1b9f8a875aa408251a23232',
+  'token' => 'pq88MvzffD',
+  'member_register' => '1',
+  'member_status' => '1',
+  'member_regcode' => '1',
+  'member_logincode' => '1',
+  'diy_url' => '0',
+  'list_url' => '{catdirs}/',
+  'list_page_url' => '{catdirs}/{page}',
+  'show_url' => '{catdirs}/{id}.html',
+  'show_page_url' => '{catdirs}/{id}_{page}.html',
+  'rand_code' => '9c5ba989f3575a60ba93a4c0fef11326',
+);

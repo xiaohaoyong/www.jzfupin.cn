@@ -1,0 +1,83 @@
+<div class="weui_cells nomtop">
+	<div class="weui_msg">
+		<h2 class="page_title">
+			<div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$member[avatar]});"></div>
+		</h2>
+		<h2 class="weui_msg_title">{$member[name]}</h2>
+		{if $member['modelid'] == 5}<h2 class="text-sm color-gray">{$arraysex[$member[sex]]}&nbsp;&nbsp;&nbsp;&nbsp;{$member[age]}岁</h2>{/if}
+		<div class="weui_btn_area nomtop">
+			{if !empty($member['good'] && $member['modelid'] == 7 )}
+			<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">{$member['good']}</a>
+			{/if}
+		</div>
+		<div class="blank15"></div>
+	</div>
+	{if $member['modelid'] == 5}
+	<div class="weui_cell text-sm">
+        <div class="weui_cell_bd weui_cell_primary">身份证号</div>
+        <div class="weui_cell_bd">
+           {$member['cardid']}
+        </div>
+    </div>
+    <div class="weui_cell text-sm">
+        <div class="weui_cell_bd weui_cell_primary">联系方式</div>
+        <div class="weui_cell_bd">
+           {$member['phone']}
+        </div>
+    </div>
+    <div class="weui_cell text-sm">
+        <div class="weui_cell_bd weui_cell_primary">户主</div>
+        <div class="weui_cell_bd">
+           {$member['family']}
+        </div>
+    </div>
+    {/if}
+</div>
+{if $member['modelid'] == 5}
+<div class="weui_cells weui-row weui-no-gutter col-border line2 panel_nav" style="margin-top:10px;" id="user_nav">
+  <a href="javascript:;" class="weui-col-25">体检结果</a>
+  <a href="javascript:;" class="weui-col-25">健康指标</a>
+  <a href="javascript:;" class="weui-col-25">问诊列表</a>
+  <a href="javascript:;" class="weui-col-25">预警列表</a> 
+</div>
+{/if}
+{if $member['modelid'] == 7}
+
+{php $uids=[];}
+{list catid=25 userid=$member[id] return=con}
+  {if $con[uid]}
+    {php $uids[] = $con[uid];}
+  {/if}
+{/list}
+{php $uids = implode(',',$uids);}
+
+{php $zan = 0;}
+{php $cai = 0;}
+{php $pin = 0;}
+{php $tou = 0;}
+
+{list table=form_like userid=$uids type=1}
+  {php $zan++;}
+{/list}
+
+{list table=form_like userid=$uids type=0}
+  {php $cai++;}
+{/list}
+
+{list table=form_share userid=$uids}
+  {php $pin++;}
+{/list}
+
+{list table=diy_tousu uid=$uids}
+  {php $tou++;}
+{/list}
+
+
+
+<div class="weui_cells weui-row weui-no-gutter col-border panel_nav nomtop line12 grzx_like" style="border-width:0 1px 0 1px">
+	<a href="javascript:;" class="weui-col-25">{$zan}<span class="text-sm block">被赞次数</span></a>
+	<a href="javascript:;" class="weui-col-25">{$cai}<span class="text-sm block">倒彩次数</span></a>
+	<a href="javascript:;" class="weui-col-25">{$pin}<span class="text-sm block">评论次数</span></a>
+	<a href="javascript:;" class="weui-col-25">{$tou}<span class="text-sm block">评价次数</span></a>
+</div>
+{/if}

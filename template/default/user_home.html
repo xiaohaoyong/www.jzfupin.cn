@@ -1,0 +1,165 @@
+{template header.html}
+<script type="text/javascript">
+$(function(){
+	viewModel.changTarBar(0);
+	$(".swiper-container").swiper({
+        loop: true,
+        autoplay: 3000
+      });
+})
+</script>
+<div class="userindex">
+	<div class="weui_cells_title">我的家庭医生</div>
+<div class="weui_panel weui_panel_access">
+    <div class="weui_panel_bd weui_cells_access">
+      	{list table=member id=$member[userid] num=1}
+      	{list table=member_doctor id=$v[id] num=1 return=info}{/list}
+      	<a href="/?c=api&a=quan&what=1" onclick="window.location.href='/?c=api&a=quan';" class="weui_media_box weui_media_appmsg">
+          <div class="weui_media_hd">
+              <div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$v[avatar]});"></div>
+          </div>
+          <div class="weui_media_bd">
+              <h4 class="weui_media_title">{$v[name]}&nbsp;医生</h4>
+              <p class="weui_media_desc">专长治疗：{$info[good]}</p>
+          </div>
+      	</a>
+		<div class="weui_media_box weui_media_text notopbr noptop">
+	      <p class="weui_media_desc">医生简介：{$info[info]}</p>
+		</div>
+		{/list}
+	</div>
+</div>
+
+		{nav parentid=$catid num=2}
+<div class="weui_panel weui_panel_access">
+	<div class="weui_panel_bd weui_cells_access">
+		<a href="{$v[url]}" class="weui_media_box weui_media_appmsg">
+		  <div class="weui_media_hd">
+		      <img class="weui_media_appmsg_thumb radius100" src="{$v[image]}" alt="">
+		  </div>
+		  <div class="weui_media_bd">
+		      <h4 class="weui_media_title">{$v[catname]}</h4>
+		       <p class="weui_media_desc">{$v[seo_description]}</p>
+		  </div>
+		  <span class="weui_cell_ft"></span>
+		</a>
+	</div>
+</div>
+		{/nav}
+<div class="weui_panel weui_panel_access">
+	<div class="weui_panel_bd weui_cells_access">
+		<div class="warp weui_media_box">
+	        <div class="weui-row swiper-container">
+		      <div class="weui-col-100 swiper-wrapper">
+		      	{list table=diy_ad type=居民首页}<a href="{$v[lianjiedizhi]}" class="swiper-slide"><img src="{$v[pic]}" width="100%" class="radius5" /></a>{/list}
+		      </div>
+		      <!-- If we need pagination -->
+      			<div class="swiper-pagination"></div>
+		    </div>
+	    </div>
+	</div>
+</div>
+	{if $member[userid] >0}
+	<div class="weui_cells_title" onclick="window.location.href='/?c=api&a=quan';">
+		<span class="pull-right">更多></span> 医生说
+	</div>
+	{else}
+	<div class="weui_cells_title">
+		医生说
+	</div>
+	{/if}
+    <div class="weui_panel weui_panel_access">
+    	
+	    	<!--默认文章-->
+	    	{list catid=3 status=3 num=1}
+	    	<div class="weui_panel_bd">
+		        <div class="weui_media_box weui_media_text" onclick="window.location.href='{$v[url]}';">
+		            <p class="weui_media_desc">{$v[description]}</p>
+		            <ul class="weui_media_info">
+						<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					</ul>
+		        </div>
+		    </div>
+		    {if !empty($v[images])}
+		    <div class="warp">
+				{php $p = unserialize($v[images]);}
+				<div class="weui-row">
+					{php $n=0;}
+					{loop $p[fileurl] $key=>$t}
+					{if $n<3}
+					<div class="weui-col-33">
+						<img src="{$t}" width="100%" class="radius5">
+					</div>
+					{/if}
+					{php $n++;}
+					{/loop}
+				</div>
+		    </div>
+		    {/if}
+		    <div class="weui-row weui-no-gutter col-border like_btn">
+		    	<a href="javascript:;" data-id="{$v[id]}" data-type="1" class="weui-col-33 text-c color-gray a_like">
+		    		<img src="/assets/images/xin.png" /><!--i class="ion-ios-heart-outline"></i--> <span>{$v[loves]}</span>
+		    	</a>
+		    	<a href="javascript:;" data-id="{$v[id]}" data-type="0" class="weui-col-33 text-c color-gray a_like">
+		    		<img src="/assets/images/ty.png" /><!--i class="ion-ios-analytics-outline"></i--> <span>{$v[hates]}</span>
+		    	</a>
+		    	<a href="{$v[url]}#comm" class="weui-col-33 text-c color-gray">
+		    		<img src="/assets/images/pl.png" /><!--i class="ion-ios-chatbubble-outline"></i--> {$v[shares]}
+		    	</a>
+		    </div>
+			{/list}
+	{if $member[userid] >0}
+	    	{php $allid = array();}
+	    	{php $n = 0;}
+	    	{list table=form_share userid=$member[userid]}
+	    		{php $allid[]=$v['cid'];}
+	    	{/list}
+	    	{php $ids = implode(',',$allid);}
+		{if count($allid) >0}
+	    	{list catid=3 id=$ids iaeweb=1}
+	    	{list table=form_share cid=$v[id] userid=$member[userid] return=s}
+	    		{php $description =  strlen($s['content']) > 60 ? $s['content'] : $v[description];}
+	    	{/list}
+	    	<div class="weui_panel_bd">
+		        <div class="weui_media_box weui_media_text" onclick="window.location.href='{$v[url]}';">
+		            <!--h4 class="weui_media_title">{function.strcut($v[title],26)}</h4-->
+		            <p class="weui_media_desc">{$description}</p>
+		            <ul class="weui_media_info">
+						<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					</ul>
+		        </div>
+		    </div>
+		    {if !empty($v[images])}
+		    <div class="warp">
+				{php $p = unserialize($v[images]);}
+				<div class="weui-row">
+					{php $n=0;}
+					{loop $p[fileurl] $key=>$t}
+					{if $n<3}
+					<div class="weui-col-33">
+						<img src="{$t}" width="100%" class="radius5">
+					</div>
+					{/if}
+					{php $n++;}
+					{/loop}
+				</div>
+		    </div>
+		    {/if}
+		    <div class="weui-row weui-no-gutter col-border like_btn">
+		    	<a href="javascript:;" data-id="{$v[id]}" data-type="1" class="weui-col-33 text-c color-gray a_like">
+		    		<img src="/assets/images/xin.png" /><!--i class="ion-ios-heart-outline"></i--> <span>{$v[loves]}</span>
+		    	</a>
+		    	<a href="javascript:;" data-id="{$v[id]}" data-type="0" class="weui-col-33 text-c color-gray a_like">
+		    		<img src="/assets/images/ty.png" /><!--i class="ion-ios-analytics-outline"></i--> <span>{$v[hates]}</span>
+		    	</a>
+		    	<a href="{$v[url]}#comm" class="weui-col-33 text-c color-gray">
+		    		<img src="/assets/images/pl.png" /><!--i class="ion-ios-chatbubble-outline"></i--> {$v[shares]}
+		    	</a>
+		    </div>
+			{/list}
+		{/if}
+	{/if}
+	</div>
+	
+</div>
+{template footer.html}

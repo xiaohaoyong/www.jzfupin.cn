@@ -1,0 +1,43 @@
+{template header.html}
+
+<div class="top_tabbar">
+    <div class="weui-row weui-no-gutter">
+        <a href="/member/?c=content&a=qrcode" class="weui-col-50">扫码添加</a>
+        <a href="/member/?c=content&a=family" class="weui-col-50 open">手动添加</a>
+    </div>
+</div>
+
+<div class="weui_panel weui_panel_access">
+	<div class="weui_panel_bd">
+	    {list catid=25 userid=$member[id] familyid=0 iaeweb=1}
+	    {php $age = !empty($v['birthday']) ?  birthday($v['birthday']) : $v['age'];}
+	    {php $thumb = !empty($v['thumb']) ? $v['thumb'] : "/assets/images/avatar.png";}
+	    {if $v['uid'] > 0}
+	    	<a name="user{$v[uid]}"></a>
+	    	{list table=member id=$v[uid] return=u}
+	    		{php $thumb = !empty($u['avatar']) ? $u['avatar'] : "/assets/images/avatar.png";}
+	    	{/list}
+	    {/if}
+	    <div class="weui_media_box weui_media_appmsg">
+	        <a class="weui_media_hd" href="{$v[url]}">
+	           <div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$thumb});"></div>
+	        </a>
+	        <div class="weui_media_bd">
+				<h4 class="weui_media_title">
+					{$v[title]}&nbsp;&nbsp;
+					<span class="text-sm color-gray">{$sex[$v[sex]]}&nbsp;{$age}岁</span>
+				</h4>
+	            <p class="weui_media_desc">身份证：{$v[cardid]}</p>
+	        </div>
+	        <a href="/member/index.php?c=content&a=add&catid=25&familyid={$v[id]}" class="weui_cell_ft">
+	        	<span class="weui_btn weui_btn_mini weui_btn_primary">添加成员</span>
+	        </a>
+	    </div>
+	    {/list}
+	</div>
+</div>
+<div class="weui_btn_area">
+	<a href="/member/index.php?c=content&a=add&catid=25" class="weui_btn weui_btn_primary">添加新户主</a>
+</div>
+
+{template footer.html}

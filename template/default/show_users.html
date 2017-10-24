@@ -1,0 +1,243 @@
+{template header.html}
+{php $display="";}
+{php $copen='display:none';}
+{if $_GET['header']}
+{php $display='display:none';}
+{php $copen="";}
+{/if}
+<script type="text/javascript">
+	$(function(){
+		{if isset($_GET['tab'])}
+			var tab_index = {$_GET['tab']};
+		{else}
+			var tab_index = 1;
+		{/if}
+		if(tab_index > 0){ 
+			$('#user_nav').find('a.weui-col-25').eq(tab_index*1-1).addClass('open');
+			$('#list_info').find('div.weui_panel_bd').eq(tab_index*1-1).show();
+
+			$('#header_name').text($('#user_nav').find('a.weui-col-25').eq(tab_index*1-1).text());
+		}
+
+		$('.toushu').click(function(){
+			viewModel.toushu($(this).attr('data-id'));
+		});
+	});
+</script>
+{php $age = empty($age) ?  birthday($birthday) : $age;}
+{if $uid > 0}
+	{list table=member id=$uid num=1}
+		{php $avatar = !empty($v['avatar']) ? $v['avatar'] : "/assets/images/avatar.png";}
+		{php $age_old = !empty($v['age'])?  birthday($birthday) : $v['age'];}
+		{php $phone = $v[phone];}
+	{/list}
+{/if}
+{php $thumb = !empty($thumb) ? $thumb : $avatar;} 
+
+{php $thumb = !empty($thumb) ? $thumb : "/assets/images/avatar.png";}
+<div class="weui_cells nomtop" style="{$display}">
+	<div class="weui_msg">
+		<h2 class="page_title">
+			<div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$thumb});"></div>
+		</h2>
+		<h2 class="weui_msg_title">{$title}</h2>
+		<h2 class="text-sm color-gray">{$arraysex[$sex]}&nbsp;&nbsp;&nbsp;&nbsp;{$age}岁</h2>
+		<div class="weui_btn_area nomtop">
+			<!--a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">标签</a-->
+		</div>
+		<div class="blank15"></div>
+	</div>
+	<div class="weui_cell text-sm">
+        <div class="weui_cell_bd weui_cell_primary">身份证号</div>
+        <div class="weui_cell_bd">
+           {$cardid}
+        </div>
+    </div>
+    <div class="weui_cell text-sm">
+        <div class="weui_cell_bd weui_cell_primary">联系方式</div>
+        <div class="weui_cell_bd">
+           {$phone}
+        </div>
+    </div>
+    <div class="weui_cell text-sm">
+        <div class="weui_cell_bd weui_cell_primary">户主</div>
+        <div class="weui_cell_bd">
+           	{if $familyid > 0}
+	           	{list catid=$catid id=$familyid}
+	           		{$v[title]}
+	           	{/list}
+           	{else}
+       			{$title}
+           	{/if}
+        </div>
+    </div>
+</div>
+<div class="weui_cells weui-row weui-no-gutter col-border line2 panel_nav" id="user_nav" style="{$display}">
+    <a href="/?id={$id}&tab=1" class="weui-col-25">体检结果</a>
+  	<a href="/?id={$id}&tab=2" class="weui-col-25">健康指标</a>
+  	<a href="/?id={$id}&tab=3" class="weui-col-25">问诊列表</a>
+  	<a href="/?id={$id}&tab=4" class="weui-col-25">预警列表</a> 
+</div>
+<div class="weui_cells_title" id="header_name" style="{$copen}"></div>
+<div id="list_info">
+	<div class="weui_cells weui_panel_bd nomtop" style="display:none">
+		{if $member['id'] == $userid}
+		<div class="weui_btn_area">
+		    <a href="/index.php?a=form&modelid=20&cid={$id}" class="weui_btn weui_btn_primary">添加体检报告</a>
+		</div>
+		{/if}
+		{list table=form_report order=id_desc cid=$id}
+		<div class="weui_media_box weui_media_text">
+			<div class="weui_media_bd">
+				<p class="weui_media_desc">{$v[content]}</p>
+				{if !empty($v[files])}
+			      {php $p = unserialize($v[files]);}
+			      <div class="weui-row files_list" style="display:none">
+			        {loop $p[fileurl] $key=>$t}
+			        <div class="weui-col-33">
+			          <img src="{$t}" width="100%" class="radius5">
+			        </div>
+			        {/loop}
+			      </div>
+			    {/if}
+				<ul class="weui_media_info">
+					<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					{if $member[id] == $uid}<li class="weui_media_info_meta weui_media_info_meta_extra"><a href="javascript:;" class="toushu" data-id="{$v[id]}">投诉</a></li>{/if}
+					<li class="pull-right">
+						<a href="javascript:;" class="a_showinfo">
+							<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+							<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+						</a>
+					</li>
+				</ul>	
+			</div>
+		</div>
+		{/list}
+	</div>
+	<div class="weui_cells weui_panel_bd nomtop" style="display:none">
+		{list table=form_warning order=id_desc cid=$id num=1}
+		<div class="weui_media_box weui_media_text">
+			<div class="weui_media_bd">
+				<p class="weui_media_desc">
+					{if $v[ssy] < 91 || $v[ssy] > 141 || $v[szy] < 61 || $v[szy] > 91}
+					血压：<span style="color:red">{$v[ssy]}/{$v[szy]}mmHg </span>
+					{else}
+					血压：{$v[ssy]}/{$v[szy]}mmHg 
+					{/if}
+					<span class="pull-right">脉搏：{$v[BMI]}次/分</span> <br />
+					{if $v[xuetang] < 4 || $v[xuetang] > 6.2}
+					空腹血糖：<span style="color:red">{$v[xuetang]}mmol/L  </span>
+					{else}
+					空腹血糖：{$v[xuetang]}mmol/L 
+					{/if}
+					<span class="pull-right">
+						{if $v[chxt] > 11.2}
+						餐后血糖：{$v[chxt]}mmol/L
+						{else}
+						餐后血糖：{$v[chxt]}mmol/L 
+						{/if}
+					</span> <br />
+				</p>
+				{if !empty($v[hwpic])}
+			      {php $p = unserialize($v[hwpic]);}
+			      <div class="weui-row files_list" style="display:none">
+			      	<hr />
+			      	<div class="weui-col-100 text-sm">红外诊断图:{$v[hwinfo]}</div>
+			        {loop $p[fileurl] $key=>$t}
+			        <div class="weui-col-33">
+			          <img src="{$t}" width="100%" class="radius5">
+			        </div>
+			        {/loop}
+			      </div>
+			    {/if}
+			    {if !empty($v[xdtpic])}
+			      {php $xdt = unserialize($v[xdtpic]);}
+			      <div class="weui-row files_list" style="display:none">
+			      	<hr />
+			      	<div class="weui-col-100 text-sm">红外诊断图:{$v[xdtinfo]}</div>
+			        {loop $xdt[fileurl] $key=>$t}
+			        <div class="weui-col-33">
+			          <img src="{$t}" width="100%" class="radius5">
+			        </div>
+			        {/loop}
+			      </div>
+			    {/if}
+				<ul class="weui_media_info">
+					<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					{if $member[id] == $uid}<li class="weui_media_info_meta weui_media_info_meta_extra"><a href="javascript:;" class="toushu" data-id="{$v[id]}">投诉</a></li>{/if}
+					<li class="pull-right">
+						<a href="javascript:;" class="a_showinfo">
+							<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+							<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+						</a>
+					</li>
+				</ul>	
+			</div>
+		</div>
+		{/list}
+	</div>
+	<div class="weui_cells weui_panel_bd nomtop" style="display:none">
+		{if $uid > 0}
+		{list catid=4 userid=$uid order=id_desc status=0,1,2 iaeweb=1}
+		    <div class="weui_media_box weui_media_text">
+				<div class="weui_media_bd" onclick="window.location.href='{$v[url]}';">
+			      <!--h4 class="weui_media_title">
+			        <span class="pull-right color-blue text-sm">{$cats[$v[catid]][catname]}</span>
+			        {if $v['status']==0}<font color="#FF0000">[未审]</font>{/if}{$v[title]}
+			      </h4-->
+			      <p class="weui_media_desc">{$v[description]}</p>
+			      {if !empty($v[files])}
+			      {php $p = unserialize($v[files]);}
+			      <div class="weui-row files_list" style="display:none">
+			        {loop $p[fileurl] $key=>$t}
+			        <div class="weui-col-33">
+			          <img src="{$t}" width="100%" class="radius5">
+			        </div>
+			        {/loop}
+			      </div>
+			      {/if}
+			      <ul class="weui_media_info">
+						<li class="weui_media_info_meta color-blue">{$cats[$v[catid]][catname]}</li>
+						<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+						<li class="pull-right">
+							<a href="javascript:;" class="a_showinfo">
+								<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+								<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+							</a>
+						</li>
+					</ul>
+			    </div>  
+		    </div>
+	    {/list}
+	    {/if}
+	</div>
+	<div class="weui_cells weui_panel_bd nomtop" style="display:none">
+		{if $member['id'] == $userid}
+		<div class="weui_btn_area">
+		    <a href="/index.php?a=form&modelid=23&cid={$id}" class="weui_btn weui_btn_primary">新增预警</a>
+		</div>
+		{/if}
+		{list table=form_warning order=id_desc cid=$id}
+		<div class="weui_media_box weui_media_text"> 
+			<div class="weui_media_bd">
+				<p class="weui_media_desc">
+					血压：{$v[ssy]}/{$v[szy]}mmHg <span class="pull-right">身高：{$v[shengao]}cm</span><br />
+					血糖：{$v[xuetang]}mmol/L <span class="pull-right">体重：{$v[tizhong]}kg</span> <br />
+					体温：{$v[tiwen]}℃  <span class="pull-right">BMI：{$v[BMI]}kg/m²</span><br />
+					呼吸：{$v[tiwen]}次/分 <span class="pull-right">脉搏：{$v[BMI]}次/分</span>
+				</p>
+				<ul class="weui_media_info">
+					<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					<li class="pull-right">
+						<a href="javascript:;" class="a_showinfo">
+							<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+							<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		{/list}
+	</div>
+</div>
+{template footer.html}

@@ -1,0 +1,29 @@
+<?php include $this->_include('header.html'); ?>
+<form action="" method="post">
+	<?php if ($member[modelid] == 7) { ?>
+	<input type="hidden" name="gobackurl" value="/member/">
+	<?php } else { ?>
+	<input type="hidden" name="gobackurl" value="/member/?c=index&a=user">
+	<?php } ?>
+	<div class="weui_cells_title">手机号（选填）</div>
+	<div class="weui_cells weui_cells_form">
+		<div class="weui_cell">
+			<div class="weui_cell_bd weui_cell_primary">
+					<input class="weui_input" type="text" name="data[phone]"  placeholder="请输入手机号">
+			</div>
+		</div>
+	</div>
+	<div class="weui_cells_title">您的建议（500字以内）</div>
+	<div class="weui_cells weui_cells_form">
+		<input type="hidden" class="button" value="转发分享" name="submit">
+		<div class="weui_cell">
+			<div class="weui_cell_bd weui_cell_primary">
+				<textarea class="weui_textarea" name="data[content]" placeholder="请输入建议内容" rows="15"></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="weui_btn_area">
+		<button class="weui_btn weui_btn_primary">提交</button>
+	</div>
+</form>
+<?php include $this->_include('footer.html'); ?>

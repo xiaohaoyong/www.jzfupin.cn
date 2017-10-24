@@ -1,0 +1,88 @@
+{template header.html}
+
+<script type="text/javascript">
+$(function(){
+
+{if $member['modelid'] == 7}
+	viewModel.changTarBar(2);
+{/if}
+
+{if $member['modelid'] == 5}
+	$('#user_nav').find('a').eq(0).addClass('open');
+{/if}
+
+})
+</script>
+
+{template member/user_header.html}
+
+
+{php $message_num=0;}
+{list table=diy_message order=id_desc userid=$member[id] status=0}
+{php $message_num++;}
+{/list}
+
+{if $member['modelid'] == 7}
+<div class="weui_cells nomtop">
+    <div class="weui_grids">
+        <a href="{function.url('index/edit')}" class="weui_grid">
+            <div class="weui_grid_icon">
+                {if $member[status] !=1 }<span class="ui-badge">1</span>{/if}
+                <i class="ion-compose"></i>
+            </div>
+            <p class="weui_grid_label">
+                个人资料
+            </p>
+        </a>
+        <a href="/index.php?catid=18#asklist" class="weui_grid">
+            <div class="weui_grid_icon">
+                <i class="ion-chatbubbles"></i>
+            </div>
+            <p class="weui_grid_label">问答列表</p>
+        </a>
+        
+        <a href="{$cats[26][url]}" class="weui_grid">
+            <div class="weui_grid_icon">
+                {if $message_num > 0 }<span class="ui-badge">{$message_num}</span>{/if}
+                <i class="ion-ios-bell"></i>
+            </div>
+            <p class="weui_grid_label">
+                消息提醒
+            </p>
+        </a>
+
+        <a href="#/progress" class="weui_grid">
+            <div class="weui_grid_icon">
+                <i class="ion-ios-book-outline"></i>
+            </div>
+            <p class="weui_grid_label">宣教阅读</p>
+        </a>
+		<a href="{$cats[14][url]}" class="weui_grid">
+			<div class="weui_grid_icon">
+				<i class="ion-ios-list-outline"></i>
+			</div>
+			<p class="weui_grid_label">帮扶规则</p>
+		</a>
+        
+        <a href="#/dialog" class="weui_grid">
+            <div class="weui_grid_icon">
+                <i class="ion-android-clipboard"></i>
+            </div>
+            <p class="weui_grid_label">预警记录</p>
+        </a>
+        <!--a href="/index.php?c=index&a=form&modelid=3" class="weui_grid">
+            <div class="weui_grid_icon">
+                <i class="ion-paintbrush"></i>
+            </div>
+            <p class="weui_grid_label">意见反馈</p>
+        </a-->
+
+    </div>
+</div>
+
+<div class="weui_btn_area">
+    <a href="/index.php?c=index&a=form&modelid=3" class="weui_btn weui_btn_primary">意见反馈</a>
+</div>
+{else}
+{/if}
+{template footer.html}

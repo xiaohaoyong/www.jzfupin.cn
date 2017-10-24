@@ -1,0 +1,8 @@
+{template header.html}
+<ul>
+{list catid=$catid page=$page}
+<li><a href="{$v[url]}">{$v[title]}</a></li>
+{/list}
+</ul>
+{$pages}
+{template footer.html}

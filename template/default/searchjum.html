@@ -1,0 +1,46 @@
+{template header.html}
+<div class="weui_cells_title">"<font style="color:#ff0000">{$kw}</font>"的 搜索结果 共 {$num} 条</div>
+{php $n=0;}
+{loop $data $t}
+{php $n++;}
+	{list catid=$t[catid] id=$t[id] iaeweb=1}
+	{php $avatar="";}
+	{php $age="";}
+	{php $thumb="";}
+
+	{php $age = !empty($v['birthday']) ?  birthday($v['birthday']) : $v['age'];}
+
+	{if $v['uid'] > 0}
+		<a name="user{$v[uid]}"></a>
+		{list table=member id=$v[uid] return=u}
+			{php $avatar = !empty($u['avatar']) ? $u['avatar'] : "/assets/images/avatar.png";}
+		{/list}
+	{/if}
+
+	{php $thumb = !empty($v['thumb']) ? $v['thumb'] : $avatar;}
+
+	{php $thumb = !empty($thumb) ? $thumb : "/assets/images/avatar.png";}
+
+
+
+	<div class="weui_media_box weui_media_appmsg">
+	    <a class="weui_media_hd" href="{$v[url]}">
+	       <div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$thumb});"></div>
+	    </a>
+	    <div class="weui_media_bd" style="cursor:pointer" onclick="window.location.href='{$v[url]}';">
+			<h4 class="weui_media_title">
+				{$v[title]}&nbsp;&nbsp;
+				<span class="text-sm color-gray">{$sex[$v[sex]]}&nbsp;{$age}岁</span>
+				<span class="disease">慢</span>
+			</h4>
+			<!--p class="weui_media_desc">随诊疾病：<span class="disease">糖尿病</span></p-->
+			<p class="weui_media_desc">签约时间：{function.date('Y-m-d',$v['time'])}</p>
+			<!--p class="weui_media_desc">就诊时间：2016-3-9</p-->
+	    </div>
+	    {if $v['telme']} <a href="javascript:;" data-cid="{$v[id]}" data-phone="{$v['phone']}" class="weui_cell_ft tel_jm"><span class="weui_btn weui_btn_mini weui_btn_primary">用药指导</span></a>{/if}
+	</div>
+	{/list}
+{/loop}
+
+{$pagelist}
+{template footer.html}

@@ -1,0 +1,7 @@
+{
+    "require": {
+        "overtrue/wechat": "~3.0",
+        "ender/yunpian-sms": "^1.0",
+        "curl/curl": "^1.4"
+    }
+}

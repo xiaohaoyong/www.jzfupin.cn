@@ -1,0 +1,27 @@
+<!--div class="weui_cells weui_panel_access nomtop">
+{php $n=0;}
+{if $member}
+{list table=diy_message userid=$member[id] status=0}
+{php $n++;}
+	<div class="weui_panel_bd">
+		<div class="weui_media_box weui_media_text">
+			<p class="weui_media_desc">{$v[msg]}</p>
+			<ul class="weui_media_info">
+				<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+				<li class="pull-right"><a href="/?c=api&a=message&id={$v[id]}">展开 <i class="ion-ios-arrow-down"></i></a></li>
+			</ul>
+		</div>
+	</div>
+{/list}
+{/if}
+</div-->
+{if $n>0}
+<div class="weui_cells weui_cells_access nomtop top_message" id="message_box">
+	<a class="weui_cell" href="{$cats[26][url]}">
+		<div class="weui_cell_bd weui_cell_primary">
+				<p style="color:#4e64d3;">你有 {$n} 条消息需要处理！</p>
+		</div>
+		<div class="weui_cell_ft"></div>
+	</a>
+</div>
+{/if}

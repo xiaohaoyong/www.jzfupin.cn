@@ -1,0 +1,86 @@
+{template header.html}
+<script type="text/javascript">
+$(function(){
+	viewModel.changTarBar(0);
+})
+</script>
+        {nav parentid=$catid num=6}
+<div class="weui_panel weui_panel_access">
+    <div class="weui_panel_bd weui_cells_access">
+        <a href="{$v[url]}" class="weui_media_box weui_media_appmsg">
+            <div class="weui_media_hd">
+                <img class="weui_media_appmsg_thumb radius100" src="{$v[image]}" alt="">
+            </div>
+            <div class="weui_media_bd">
+                <h4 class="weui_media_title">{$v[catname]}</h4>
+                <p class="weui_media_desc">{$v[seo_description]}</p>
+            </div>
+            <span class="weui_cell_ft"></span>
+        </a>
+    </div>
+</div>
+        {/nav}
+<div class="weui_panel weui_panel_access">
+    <div class="weui_panel_bd weui_cells_access">
+        <div class="warp weui_media_box">
+	        <div class="weui-row">
+		      {list table=diy_ad type=医生首页 num=2}
+              <div class="weui-col-50">
+                <a href="{$v[lianjiedizhi]}"><img src="{$v[pic]}" width="100%" class="radius5" /></a>
+		      </div>
+              {/list}
+		    </div>
+	    </div>
+    </div>
+</div>
+{nav catid=1,3 num=2}
+<div class="weui_cells_title" onclick="window.location.href='{$cats[$v[catid]][url]}';">
+    <span class="pull-right">更多></span>{$cats[$v[catid]][catname]}
+</div>
+<div class="weui_panel weui_panel_access">
+{list catid=$v[catid] num=2 iaeweb=1}
+    <div class="weui_panel_bd">
+        <div class="weui_media_box weui_media_text" onclick="window.location.href='{$v[url]}';">
+            <h4 class="weui_media_title"><span class="weui_media_info pull-right" style="margin-top:0;line-height:32px;padding:0">{function.date('Y-m-d',$v['time'])}</span>{function.strcut($v[title],26)}</h4>
+            <p class="weui_media_desc">{$v[description]}</p>
+            <!--ul class="weui_media_info">
+				<li class="weui_media_info_meta">文字来源</li>
+				<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+				<li class="weui_media_info_meta weui_media_info_meta_extra">其它信息</li>
+				<li class="pull-right"><a href="{$cats[$v[catid]][url]}">展开 <i class="ion-ios-arrow-down"></i></a></li>
+			</ul-->
+        </div>
+    </div>
+    {if !empty($v[images])}
+    <div class="warp">
+		{php $p = unserialize($v[images]);}
+		<div class="weui-row">
+		    {php $n=0;}
+            {loop $p[fileurl] $key=>$t}
+            {if $n<3}
+            <div class="weui-col-33">
+                <img src="{$t}" width="100%" class="radius5">
+            </div>
+            {/if}
+            {php $n++;}
+            {/loop}
+		</div>
+    </div>
+    {/if}
+    <div class="weui-row weui-no-gutter col-border like_btn">
+        <a href="javascript:;" data-id="{$v[id]}" data-type="1" class="weui-col-33 text-c color-gray a_like">
+            <img src="/assets/images/xin.png" /><!--i class="ion-ios-heart-outline"></i--> <span>{$v[loves]}</span>
+        </a>
+        <a href="javascript:;" data-id="{$v[id]}" data-type="0" class="weui-col-33 text-c color-gray a_like">
+            <img src="/assets/images/ty.png" /><!--i class="ion-ios-analytics-outline"></i--> <span>{$v[hates]}</span>
+        </a>
+        <a href="{$v[url]}#comm" class="weui-col-33 text-c color-gray">
+            <img src="/assets/images/pl.png" /><!--i class="ion-ios-chatbubble-outline"></i--> {$v[shares]}
+        </a>
+    </div>
+{/list}
+</div>
+{/nav}
+
+
+{template footer.html}

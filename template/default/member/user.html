@@ -1,0 +1,109 @@
+{template header.html}
+
+<script type="text/javascript">
+$(function(){
+	viewModel.changTarBar(2);
+})
+</script>
+<style type="text/css">
+	.weui_grid.user_nav{padding:10px 0; text-align: center;}
+</style>
+
+{list catid=25 uid=$member[id] num=1 iaeweb=1 return=con}{/list}
+
+{php $age = empty($con['age']) ?  birthday($con['birthday']) : $con['age'];}
+
+{php $sex = $con['sex'] ?  $con['sex'] : $member['sex'];}
+{php $age = $age ? $age : $member['age'];}
+
+{php $avatar = !empty($member['avatar']) ? $member['avatar'] : "/assets/images/avatar.png";}
+{php $title = $member[name];}
+{php $age_old = !empty($member['age'])?  birthday($con[birthday]) : $member['age'];}
+{php $phone = $member[phone];}
+
+{php $thumb = !empty($con[thumb]) ? $con[thumb] : $avatar;} 
+
+{php $thumb = !empty($thumb) ? $thumb : "/assets/images/avatar.png";}
+
+
+{php $title = !empty($con['title']) ? $con['title'] : $member['name'];}
+
+
+{php $message_num=0;}
+{list table=diy_message order=id_desc userid=$member[id] status=0}
+{php $message_num++;}
+{/list}
+
+<div class="weui_cells nomtop">
+	<div class="weui_msg">
+		<h2 class="page_title">
+			<div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$thumb});"></div>
+		</h2>
+		<h2 class="weui_msg_title">{$title}</h2>
+		<h2 class="text-sm color-gray">{$arraysex[$sex]}&nbsp;&nbsp;&nbsp;&nbsp;{$age}岁</h2>
+		<div class="weui_btn_area nomtop">
+			<!--<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+			<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+			<a href="{function.url('login/out')}" class="weui_btn weui_btn_mini weui_btn_default">开发按钮</a>-->
+		</div>
+		<div class="blank15"></div>
+	</div>
+</div>
+
+{if $con[poor]}
+<div class="weui_cells nomtop">
+	<div class="weui_grids">
+		<a href="javascript:;" class="weui_grid user_nav text-sm">{$con[pksx]}<span class="color-gray block">贫困属性</span></a>
+		<a href="javascript:;" class="weui_grid user_nav text-sm">{$con[pkxz]}<span class="color-gray block">贫困性质</span></a>
+		<a href="javascript:;" class="weui_grid user_nav text-sm">{$con[pkyy]}<span class="color-gray block">贫困原因</span></a>
+	</div>
+</div>
+{/if}
+
+
+<div class="weui_cells">
+    <div class="weui_grids">
+        <a href="{$cats[26][url]}" class="weui_grid">
+            <div class="weui_grid_icon">
+                {if $message_num > 0 }<span class="ui-badge">{$message_num}</span>{/if}
+                <i class="ion-ios-bell"></i>
+            </div>
+            <p class="weui_grid_label">
+                消息提醒
+            </p>
+        </a>
+        <a href="/?id={$con[id]}&tab=3&header=2" class="weui_grid">
+            <div class="weui_grid_icon">
+                <i class="ion-chatbubbles"></i>
+            </div>
+            <p class="weui_grid_label">问诊记录</p>
+        </a>
+        <a href="/?id={$con[id]}&tab=4&header=2" class="weui_grid">
+            <div class="weui_grid_icon">
+                <i class="ion-ios-pulse-strong"></i>
+            </div>
+            <p class="weui_grid_label">预警记录</p>
+        </a>
+        <a href="/?c=api&a=quan&header=2" class="weui_grid">
+            <div class="weui_grid_icon">
+                <i class="ion-ios-book"></i>
+            </div>
+            <p class="weui_grid_label">宣教记录</p>
+        </a>
+		<a href="/?c=api&a=family" class="weui_grid">
+			<div class="weui_grid_icon">
+				<i class="ion-ios-people"></i>
+			</div>
+			<p class="weui_grid_label">家庭成员</p>
+		</a>
+        <a href="/?c=index&a=form&modelid=3" class="weui_grid">
+            <div class="weui_grid_icon">
+                <i class="ion-paintbrush"></i>
+            </div>
+            <p class="weui_grid_label">意见反馈</p>
+        </a>
+
+    </div>
+</div>
+
+{template footer.html}

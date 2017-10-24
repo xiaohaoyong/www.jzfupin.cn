@@ -1,0 +1,77 @@
+{template header.html}
+<script type="text/javascript">
+$(function(){
+	viewModel.changTarBar(1);
+})
+</script>
+{php $origin=!empty($origin)? $origin : $site_name;}
+<h2 class="show_title">{$title}</h2>
+<div class="weui_panel weui_article nomtop">
+	<div class="weui_panel_bd">
+		<div class="weui_media_box weui_media_text">
+			<ul class="weui_media_info" style="margin-top:-15px;margin-bottom:10px">
+				<li class="weui_media_info_meta">{function.date('Y-m-d',$time)}</li>
+				<li class="weui_media_info_meta weui_media_info_meta_extra">文章来源：{$origin}</li>
+			</ul>
+			<section>
+                <div>{$content}</div>
+				{if !empty($images)}
+				<div class="weui-row">
+					{loop $images[fileurl] $key=>$t}
+					<div class="weui-col-33">
+						<img src="{$t}" width="100%" class="radius5">
+					</div>
+					{/loop}
+				</div>
+				{/if}
+            </section>
+			<ul class="weui_media_info">
+				<li class="weui_media_info_meta"><a href="javascript:;" data-id="{$id}" data-type="1" class="a_like"><i class="ion-android-favorite-outline"></i> 赞：<span>{$loves}</span></a></li>
+				<li class="weui_media_info_meta"><a href="javascript:;" data-id="{$id}" data-type="0" class="a_like"> <i class="ion-thumbsdown"></i> 踩：<span>{$hates}</span></a></li>
+				<li class="weui_media_info_meta weui_media_info_meta_extra"> 评论：{$shares}</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="weui_panel weui_panel_access">
+<div class="weui_panel_bd">
+{list table=form_share cid=$id}
+	<!--div class="weui_panel_hd"><span class="pull-right">{function.date('Y-m-d H:i:s',$v[time])}</span>{$v[name]}</div-->
+		<div class="weui_media_box weui_media_text">
+			<p class="weui_media_desc">{$v[content]}</p>
+			<ul class="weui_media_info">
+				<li class="weui_media_info_meta">{$v[name]}</li>
+				<li class="weui_media_info_meta weui_media_info_meta_extra">{function.date('Y-m-d',$v['time'])}</li>
+				<li class="pull-right">
+					<a href="javascript:;" class="a_showinfo">
+						<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+						<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+					</a>
+				</li>
+			</ul>	
+		</div>
+{/list}
+</div>
+</div>
+
+<a name="comm"></a>
+<form action="{function.url('index/form', array('modelid'=>16, 'cid'=>$id))}" method="post">
+	{if $member['modelid'] == 7 && $catid == 3}
+		<div class="weui_cells_title">温馨提示：您的分享评论最终会显示在居民端的医生说中哦</div>
+	{else}
+		<div class="weui_cells_title">您的评论</div>
+	{/if}
+	<div class="weui_cells weui_cells_form">
+		<input type="hidden" class="button" value="转发分享" name="submit">
+		<div class="weui_cell">
+			<div class="weui_cell_bd weui_cell_primary">
+				<textarea class="weui_textarea" name="data[content]" placeholder="请输入内容" rows="6"></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="weui_btn_area">
+		<button class="weui_btn weui_btn_primary">提交</button>
+	</div>
+</form>
+{template footer.html}

@@ -1,0 +1,193 @@
+{template header.html}
+{php $display="";}
+{php $copen='display:none';}
+{if $_GET['header']}
+{php $display='display:none';}
+{php $copen="";}
+{/if}
+<script type="text/javascript">
+$(function(){
+	$('#qywy').click(function(){
+		$.confirm("确定寻医问药？", function() {
+		  	var userid = {$member[userid]};
+		  	var uid = {$member[id]};
+		  	if(userid > 0) {
+		  		viewModel.telme(uid);
+		  	} else {
+		  		$.alert('你还没有辖区医生');
+		  	}
+		  }, function() {
+		  	
+		  });
+	});
+});
+</script>
+
+{if $what}
+
+{list table=member id=$member[userid] num=1}
+{list table=member_doctor id=$v[id] num=1 return=info}{/list}
+	{php $docphone = $v[phone];}
+	{php $age = birthday($info['brithday']);}
+<div class="weui_cells nomtop">
+	<div class="weui_msg">
+		<h2 class="page_title">
+			<div class="weui_media_appmsg_thumb thumb_avatar radius100" style="background-image:url({$v[avatar]});">
+			</div>
+		</h2>
+		<h2 class="weui_msg_title">{$v[name]}</h2>
+		<h2 class="text-sm color-gray">{$arraysex[$v[sex]]}&nbsp;&nbsp;&nbsp;&nbsp;{$age}岁</h2>
+		<div class="blank15"></div>
+	</div>
+</div>
+
+
+<div class="weui_cells_title">专长治疗</div>
+
+<div class="weui_cells">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <p>{$info[good]}</p>
+      </div>
+    </div>
+</div>
+
+<div class="weui_cells_title">医生简介</div>
+
+
+<div class="weui_panel weui_panel_access">
+	<div class="weui_panel_bd">
+		<div class="weui_media_box weui_media_text">
+			<p class="weui_media_desc allinfo">{$info[info]}</p>
+		</div>
+	</div>
+	<div class="blank10"></div>
+	<div class="weui-row weui_btn_area weui-cell nomtop">
+		<div class="weui-col-33">
+	    	<a href="{$cats[23][url]}"><img src="/assets/images/tw.png" width="100%" /></a>
+		</div>
+		<div class="weui-col-33">
+	    	<a href="tel:{$docphone}"><img src="/assets/images/dh.png" width="100%" /></a>
+		</div>
+		<div class="weui-col-33">
+	    	<a href="javascript:" id="qywy"><img src="/assets/images/yy.png" width="100%" /></a>
+		</div>
+	</div>
+</div>
+
+{/list}
+
+{else}
+
+<div class="weui_cells weui_panel_access nomtop"  style="{$display}">
+	{template block_nav.html}
+</div>
+
+{/if}
+
+
+<div class="weui_cells_title">
+	 医生说
+</div>
+
+	<!--默认文章-->
+	{list catid=3 status=3 num=1}
+	<div class="weui_panel weui_panel_access">
+    	
+    	<div class="weui_panel_bd">
+	        <div class="weui_media_box weui_media_text" onclick="window.location.href='{$v[url]}';">
+	            <p class="weui_media_desc">{$v[description]}</p>
+	            <ul class="weui_media_info">
+					<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+				</ul>
+	        </div>
+	    </div>
+	    {if !empty($v[images])}
+	    <div class="warp">
+			{php $p = unserialize($v[images]);}
+			<div class="weui-row">
+				{php $n=0;}
+				{loop $p[fileurl] $key=>$t}
+				{if $n<3}
+				<div class="weui-col-33">
+					<img src="{$t}" width="100%" class="radius5">
+				</div>
+				{/if}
+				{php $n++;}
+				{/loop}
+			</div>
+	    </div>
+	    {/if}
+	    <div class="weui-row weui-no-gutter col-border like_btn">
+	    	<a href="javascript:;" data-id="{$v[id]}" data-type="1" class="weui-col-33 text-c color-gray a_like">
+	    		<img src="/assets/images/xin.png" /><!--i class="ion-ios-heart-outline"></i--> <span>{$v[loves]}</span>
+	    	</a>
+	    	<a href="javascript:;" data-id="{$v[id]}" data-type="0" class="weui-col-33 text-c color-gray a_like">
+	    		<img src="/assets/images/ty.png" /><!--i class="ion-ios-analytics-outline"></i--> <span>{$v[hates]}</span>
+	    	</a>
+	    	<a href="{$v[url]}#comm" class="weui-col-33 text-c color-gray">
+	    		<img src="/assets/images/pl.png" /><!--i class="ion-ios-chatbubble-outline"></i--> {$v[shares]}
+	    	</a>
+	    </div>
+
+    </div>
+    {/list}
+
+    	{php $allid = array();}
+    	{php $n = 0;}
+    	{list table=form_share userid=$member[userid]}
+    		{php $allid[]=$v['cid'];}
+    	{/list}
+    	{php $ids = implode(',',$allid);}
+		{if count($allid) >0}
+    	{list catid=3 id=$ids iaeweb=1}
+    	{list table=form_share cid=$v[id] userid=$member[userid] return=s}
+    		{php $description =  strlen($s['content']) > 60 ? $s['content'] : $v[description];}
+    	{/list}
+	<div class="weui_panel weui_panel_access">
+		<div class="weui_panel_bd">
+	        <div class="weui_media_box weui_media_text" onclick="window.location.href='{$v[url]}';">
+	            <!--h4 class="weui_media_title">{function.strcut($v[title],26)}</h4-->
+	            <p class="weui_media_desc">{$description}</p>
+	            <ul class="weui_media_info">
+					<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					<li class="pull-right">
+						<a href="javascript:;" class="a_showinfo">
+							<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+							<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+						</a>
+					</li>
+				</ul>
+	        </div>
+	    </div>
+	    {if !empty($v[images])}
+	    <div class="warp">
+			{php $p = unserialize($v[images]);}
+			<div class="weui-row">
+				{php $n=0;}
+				{loop $p[fileurl] $key=>$t}
+				{if $n<3}
+				<div class="weui-col-33">
+					<img src="{$t}" width="100%" class="radius5">
+				</div>
+				{/if}
+				{php $n++;}
+				{/loop}
+			</div>
+	    </div>
+	    {/if}
+	    <div class="weui-row weui-no-gutter col-border like_btn">
+	    	<a href="javascript:;" data-id="{$v[id]}" data-type="1" class="weui-col-33 text-c color-gray a_like">
+	    		<img src="/assets/images/xin.png" /><!--i class="ion-ios-heart-outline"></i--> <span>{$v[loves]}</span>
+	    	</a>
+	    	<a href="javascript:;" data-id="{$v[id]}" data-type="0" class="weui-col-33 text-c color-gray a_like">
+	    		<img src="/assets/images/ty.png" /><!--i class="ion-ios-analytics-outline"></i--> <span>{$v[hates]}</span>
+	    	</a>
+	    	<a href="{$v[url]}#comm" class="weui-col-33 text-c color-gray">
+	    		<img src="/assets/images/pl.png" /><!--i class="ion-ios-chatbubble-outline"></i--> {$v[shares]}
+	    	</a>
+	    </div>
+    </div>
+		{/list}
+	{/if}
+{template footer.html}

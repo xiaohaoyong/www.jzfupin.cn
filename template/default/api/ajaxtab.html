@@ -1,0 +1,154 @@
+{php $uids = array();}
+{list catid=25 userid=$member[id]}
+{if $v[uid]> 0}
+	{php $uids[] = $v[uid];}
+{/if}
+{/list}
+{php $uids = implode(',',$uids);}
+
+{if $tab == 1}
+	{if !empty($uids)}
+		{list catid=6 userid=$uids order=id_desc status=0,1,2 iaeweb=1}
+		    <div class="weui_media_box weui_media_text">
+				<div class="weui_media_bd">
+			      <h4 class="weui_media_title">
+			        <span class="pull-right color-blue text-sm">{$cats[$v[catid]][catname]}</span>
+			        {if $v['status']==0}<font color="#FF0000">[未审]</font>{/if}{$v[title]}
+			      </h4>
+			      <p class="weui_media_desc">{$v[description]}</p>
+			      {if !empty($v[files])}
+			      {php $p = unserialize($v[files]);}
+			      <div class="weui-row files_list" style="display:none">
+			        {loop $p[fileurl] $key=>$t}
+			        <div class="weui-col-33">
+			          <img src="{$t}" width="100%" class="radius5">
+			        </div>
+			        {/loop}
+			      </div>
+			      {/if}
+			      <ul class="weui_media_info">
+						<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+						{if $member[modelid] == 7}<li class="weui_media_info_meta weui_media_info_meta_extra"><a href="{$v[url]}">我要回答</a></li>{/if}
+						<li class="pull-right">
+							<a href="{$v[url]}">立即查看</a>
+							<!--a href="javascript:;" class="a_showinfo">
+								<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+								<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+							</a-->
+						</li>
+					</ul>
+			    </div>  
+		    </div>
+		    <!--@todo 调去回答-->
+	    {/list}
+	{/if}
+
+{/if}
+
+{if $tab == 2}
+	{list catid=8 userid=$member[id] order=id_desc status=0,1,2 iaeweb=1}
+	    <div class="weui_media_box weui_media_text">
+			<div class="weui_media_bd">
+		      <!--h4 class="weui_media_title">
+		        <span class="pull-right color-blue text-sm">{$cats[$v[catid]][catname]}</span>
+		        {if $v['status']==0}<font color="#FF0000">[未审]</font>{/if}{$v[title]}
+		      </h4-->
+		      <p class="weui_media_desc">{$v[description]}</p>
+		      {if !empty($v[files])}
+		      {php $p = unserialize($v[files]);}
+		      <div class="weui-row files_list" style="display:none">
+		        {loop $p[fileurl] $key=>$t}
+		        <div class="weui-col-33">
+		          <img src="{$t}" width="100%" class="radius5">
+		        </div>
+		        {/loop}
+		      </div>
+		      {/if}
+		      <ul class="weui_media_info">
+					<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					<li class="pull-right">
+					    <a href="{$v[url]}">立即查看</a>
+						<!--a href="javascript:;" class="a_showinfo">
+							<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+							<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+						</a-->
+					</li>
+				</ul>
+		    </div>  
+	    </div>
+	    <!--@todo 调去回答-->
+    {/list}
+{/if}
+
+
+{if $tab == 3}
+	{list catid=9 userid=$member[id] order=id_desc status=0,1,2 iaeweb=1}
+	    <div class="weui_media_box weui_media_text">
+			<div class="weui_media_bd">
+		      <!--h4 class="weui_media_title">
+		        <span class="pull-right color-blue text-sm">{$cats[$v[catid]][catname]}</span>
+		        {if $v['status']==0}<font color="#FF0000">[未审]</font>{/if}{$v[title]}
+		      </h4-->
+		      <p class="weui_media_desc">{$v[description]}</p>
+		      {if !empty($v[files])}
+		      {php $p = unserialize($v[files]);}
+		      <div class="weui-row files_list" style="display:none">
+		        {loop $p[fileurl] $key=>$t}
+		        <div class="weui-col-33">
+		          <img src="{$t}" width="100%" class="radius5">
+		        </div>
+		        {/loop}
+		      </div>
+		      {/if}
+		      <ul class="weui_media_info">
+					<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					<li class="pull-right">
+						<a href="{$v[url]}">立即查看</a>
+						<!--a href="javascript:;" class="a_showinfo">
+							<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+							<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+						</a-->
+					</li>
+				</ul>
+		    </div>  
+	    </div>
+	    <!--@todo 调去回答-->
+    {/list}
+{/if}
+
+{if $tab == 4}
+	{if !empty($uids)}
+	{list catid=5 userid=$uids order=id_desc status=0,1,2 iaeweb=1}
+	    <div class="weui_media_box weui_media_text">
+			<div class="weui_media_bd">
+		      <!--h4 class="weui_media_title">
+		        <span class="pull-right color-blue text-sm">{$cats[$v[catid]][catname]}</span>
+		        {if $v['status']==0}<font color="#FF0000">[未审]</font>{/if}{$v[title]}
+		      </h4-->
+		      <p class="weui_media_desc">{$v[description]}</p>
+		      {if !empty($v[files])}
+		      {php $p = unserialize($v[files]);}
+		      <div class="weui-row files_list" style="display:none">
+		        {loop $p[fileurl] $key=>$t}
+		        <div class="weui-col-33">
+		          <img src="{$t}" width="100%" class="radius5">
+		        </div>
+		        {/loop}
+		      </div>
+		      {/if}
+		      <ul class="weui_media_info">
+					<li class="weui_media_info_meta">{function.date('Y-m-d',$v['time'])}</li>
+					<li class="pull-right">
+						<a href="{$v[url]}">立即查看</a>
+						<!--a href="javascript:;" class="a_showinfo">
+							<span class="show_btn">展开 <i class="ion-ios-arrow-down"></i></span>
+							<span class="hide_btn">收起 <i class="ion-ios-arrow-up"></i></span>
+						</a-->
+					</li>
+				</ul>
+		    </div>  
+	    </div>
+	    <!--@todo 调去回答-->
+    {/list}
+    {/if}
+{/if}
