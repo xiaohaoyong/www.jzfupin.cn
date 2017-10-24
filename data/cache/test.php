@@ -8,5 +8,5 @@
 
 $value=str_replace("<?php if (!defined('IN_IAEWEB')) exit(); ?>","",file_get_contents("category.cache.php"));
 $value = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $value);
-var_dump(unserialize($value));exit;
+print_r(unserialize($value)[7]);exit;
 
