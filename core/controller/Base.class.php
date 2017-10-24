@@ -173,6 +173,10 @@ abstract class Base
     protected function get_member_info()
     {
         if (!defined('IAEWEB_MEMBER') || defined('IAEWEB_ADMIN')) return false;
+
+        var_dump($this->cookie->get('member_id'));
+        var_dump($this->cookie->get('member_code'));
+        exit;
         if ($this->cookie->get('member_id') && $this->cookie->get('member_code')) {
             $id = (int)$this->cookie->get('member_id');
             $code = $this->cookie->get('member_code');
