@@ -302,7 +302,7 @@ function get_cache($cache_file)
         $file = DATA_DIR.'cache'.DIRECTORY_SEPARATOR.$cache_file.'.cache.php';
         if (is_file($file)) {
             $value=str_replace("<?php if (!defined('IN_IAEWEB')) exit(); ?>", "", file_get_contents($file));
-            $value = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $value);
+            //$value = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $value);
             $cacheid[$cache_file] = unserialize($value);
         } else {
             return false;

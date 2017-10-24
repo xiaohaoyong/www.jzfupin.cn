@@ -407,10 +407,8 @@ class models extends Admin {
 				$data[$modelid]['fields']        = $_fields;
 				$data[$modelid]['setting']      = $setting;
 			}
-			var_dump($modeltype . '_model');
 			set_cache($modeltype . '_model', $data);
 		}
-exit;
 	}
 
 }
