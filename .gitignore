@@ -1,3 +1,4 @@
 vendor/
 composer.lock
 data/config/config.ini.php
+data/cache
