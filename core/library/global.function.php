@@ -7,26 +7,27 @@ if (!defined('IN_IAEWEB')) exit();
  */
 function image($url)
 {
-    if (empty($url) || strlen($url) < 4) return SITE_PATH . 'data/upload/nopic.gif';
+    if (empty($url) || strlen($url) < 4) return SITE_PATH.'data/upload/nopic.gif';
     if (substr($url, 0, 7) == 'http://') return $url;
     if (strpos($url, SITE_PATH) !== false && SITE_PATH != '/') return $url;
     if (substr($url, 0, 1) == '/') $url = substr($url, 1);
-    return SITE_PATH . $url;
+    return SITE_PATH.$url;
 }
 
 /**
  * 缩略图片
  */
-function thumb($img, $width=200, $height=200)  {
-    if (empty($img) || strlen($img)  < 4) return SITE_PATH . 'data/upload/nopic.gif';
+function thumb($img, $width = 200, $height = 200)
+{
+    if (empty($img) || strlen($img) < 4) return SITE_PATH.'data/upload/nopic.gif';
     if (file_exists(IAEWEB_PATH.$img)) {
         $ext = fileext($img);
-		$thumb = $img . '.thumb.' . $width . 'x' . $height . '.' . $ext;
-		if (!file_exists(IAEWEB_PATH.$thumb)) {
-		    $image = iaeweb::load_class('image');
-		    $image->thumb(IAEWEB_PATH.$img, IAEWEB_PATH.$thumb, $width, $height); // 生成图像缩略图
-		}
-		return $thumb;
+        $thumb = $img.'.thumb.'.$width.'x'.$height.'.'.$ext;
+        if (!file_exists(IAEWEB_PATH.$thumb)) {
+            $image = iaeweb::load_class('image');
+            $image->thumb(IAEWEB_PATH.$img, IAEWEB_PATH.$thumb, $width, $height); // 生成图像缩略图
+        }
+        return $thumb;
     }
     return $img;
 }
@@ -74,7 +75,7 @@ function strcut($string, $length, $dot = '')
     if ($noc > $length) $n -= $tn;
     $strcut = substr($string, 0, $n);
     $strcut = str_replace(array('&', '"', '<', '>'), array('&amp;', '&quot;', '&lt;', '&gt;'), $strcut);
-    return $strcut . $dot;
+    return $strcut.$dot;
 }
 
 /**
@@ -82,7 +83,7 @@ function strcut($string, $length, $dot = '')
  */
 function fileext($filename)
 {
-	return pathinfo($filename, PATHINFO_EXTENSION);
+    return pathinfo($filename, PATHINFO_EXTENSION);
 }
 
 /**
@@ -105,7 +106,7 @@ function position($catid, $symbol = ' > ')
     krsort($catids);
     $html = '';
     foreach ($catids as $t) {
-        $html .= "<a href=\"" . $cats[$t]['url'] . "\" title=\"" . $cats[$t]['catname'] . "\">" . $cats[$t]['catname'] . "</a>";
+        $html .= "<a href=\"".$cats[$t]['url']."\" title=\"".$cats[$t]['catname']."\">".$cats[$t]['catname']."</a>";
         if ($catid != $t) $html .= $symbol;
     }
     return $html;
@@ -117,9 +118,8 @@ function position($catid, $symbol = ' > ')
 function parentids($catid, $cats)
 {
     if (empty($catid)) return false;
-    $catids = $catid . ',';
-    if ($cats[$catid]['parentid'])
-        $catids .= parentids($cats[$catid]['parentid'], $cats);
+    $catids = $catid.',';
+    if ($cats[$catid]['parentid']) $catids .= parentids($cats[$catid]['parentid'], $cats);
     return $catids;
 }
 
@@ -188,7 +188,7 @@ function file_size_count($size, $dec = 2)
         $size /= 1024;
         $pos++;
     }
-    return round($size, $dec) . " " . $a[$pos];
+    return round($size, $dec)." ".$a[$pos];
 }
 
 /**
@@ -211,13 +211,7 @@ function is_mobile()
     if (empty($_SERVER['HTTP_USER_AGENT'])) {
         $is_mobile = false;
     } elseif (strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile') !== false // many mobile devices (all iPhone, iPad, etc.)
-        || strpos($_SERVER['HTTP_USER_AGENT'], 'Android') !== false
-        || strpos($_SERVER['HTTP_USER_AGENT'], 'Silk/') !== false
-        || strpos($_SERVER['HTTP_USER_AGENT'], 'Kindle') !== false
-        || strpos($_SERVER['HTTP_USER_AGENT'], 'BlackBerry') !== false
-        || strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== false
-        || strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mobi') !== false
-    ) {
+        || strpos($_SERVER['HTTP_USER_AGENT'], 'Android') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'Silk/') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'Kindle') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'BlackBerry') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mobi') !== false) {
         $is_mobile = true;
     } else {
         $is_mobile = false;
@@ -226,8 +220,8 @@ function is_mobile()
 }
 
 /**
-* 判定微信端
-*/
+ * 判定微信端
+ */
 
 function is_wechat()
 {
@@ -249,7 +243,7 @@ function is_wechat()
 function dir_path($path)
 {
     $path = str_replace('\\', '/', $path);
-    if (substr($path, -1) != '/') $path = $path . '/';
+    if (substr($path, -1) != '/') $path = $path.'/';
     return $path;
 }
 
@@ -272,7 +266,7 @@ function delete_dir($dir)
 {
     $dir = dir_path($dir);
     if (!is_dir($dir)) return FALSE;
-    $list = glob($dir . '*');
+    $list = glob($dir.'*');
     foreach ($list as $v) {
         is_dir($v) ? delete_dir($v) : @unlink($v);
     }
@@ -285,14 +279,14 @@ function delete_dir($dir)
 function set_cache($cache_file, $value)
 {
     if (!$cache_file) return false;
-    $cache_file = DATA_DIR . 'cache' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
+    $cache_file = DATA_DIR.'cache'.DIRECTORY_SEPARATOR.$cache_file.'.cache.php';
     $value = (!is_array($value)) ? serialize(trim($value)) : serialize($value);
-	
-	//增加安全
-	$value = "<?php if (!defined('IN_IAEWEB')) exit(); ?>".$value; 
-	
-    if (!is_dir(DATA_DIR . 'cache' . DIRECTORY_SEPARATOR)) {
-        mkdirs(DATA_DIR . 'cache' . DIRECTORY_SEPARATOR);
+
+    //增加安全
+    $value = "<?php if (!defined('IN_IAEWEB')) exit(); ?>".$value;
+
+    if (!is_dir(DATA_DIR.'cache'.DIRECTORY_SEPARATOR)) {
+        mkdirs(DATA_DIR.'cache'.DIRECTORY_SEPARATOR);
     }
     return file_put_contents($cache_file, $value, LOCK_EX) ? true : false;
 }
@@ -303,16 +297,17 @@ function set_cache($cache_file, $value)
 function get_cache($cache_file)
 {
     if (!$cache_file) return false;
-    static $cacheid =array();
-    if(!isset($cacheid[$cache_file])){
-       $file = DATA_DIR . 'cache' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
-       if(is_file($file)) {
-         $cacheid[$cache_file] = unserialize(str_replace("<?php if (!defined('IN_IAEWEB')) exit(); ?>","",file_get_contents($file)));
-       }else{
-        return false;
-       }
+    static $cacheid = array();
+    if (!isset($cacheid[$cache_file])) {
+        $file = DATA_DIR.'cache'.DIRECTORY_SEPARATOR.$cache_file.'.cache.php';
+        if (is_file($file)) {
+            $value=str_replace("<?php if (!defined('IN_IAEWEB')) exit(); ?>", "", file_get_contents($file));
+            $value = preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $value);
+            $cacheid[$cache_file] = unserialize($value);
+        } else {
+            return false;
+        }
     }
-    var_dump($cacheid);exit;
     return $cacheid[$cache_file];
 }
 
@@ -322,7 +317,7 @@ function get_cache($cache_file)
 function delete_cache($cache_file)
 {
     if (!$cache_file) return true;
-    $cache_file = DATA_DIR . 'cache' . DIRECTORY_SEPARATOR . $cache_file . '.cache.php';
+    $cache_file = DATA_DIR.'cache'.DIRECTORY_SEPARATOR.$cache_file.'.cache.php';
     return is_file($cache_file) ? unlink($cache_file) : true;
 }
 
@@ -336,18 +331,18 @@ function url($route, $params = null)
     $arr = array_diff($arr, array(''));
     $url = 'index.php';
     if (isset($arr[0]) && $arr[0]) {
-        $url .= '?c=' . strtolower($arr[0]);
-        if (isset($arr[1]) && $arr[1] && $arr[1] != 'index') $url .= '&a=' . strtolower($arr[1]);
+        $url .= '?c='.strtolower($arr[0]);
+        if (isset($arr[1]) && $arr[1] && $arr[1] != 'index') $url .= '&a='.strtolower($arr[1]);
     }
     if (!is_null($params) && is_array($params)) {
         $params_url = array();
         foreach ($params as $key => $value) {
-            $params_url[] = trim($key) . '=' . trim($value);
+            $params_url[] = trim($key).'='.trim($value);
         }
-        $url .= '&' . implode('&', $params_url);
+        $url .= '&'.implode('&', $params_url);
     }
     $url = str_replace('//', '/', $url);
-    return Base::get_base_url() . $url;
+    return Base::get_base_url().$url;
 }
 
 /* hbsion PLUS*/
@@ -368,32 +363,34 @@ function get_parent_dir($catid, $symbol = '/')
     }
     return $catdirs;
 }
+
 /**
  * 字符串替换一次
  */
- function str_replace_once($needkeywords, $replacekeywords,$content ) {
-   $pos = strpos($content, $needkeywords);
-   if ($pos === false) {
-      return $content ;
-   }
-   return substr_replace($content, $replacekeywords, $pos, strlen($needkeywords));
+function str_replace_once($needkeywords, $replacekeywords, $content)
+{
+    $pos = strpos($content, $needkeywords);
+    if ($pos === false) {
+        return $content;
+    }
+    return substr_replace($content, $replacekeywords, $pos, strlen($needkeywords));
 }
 
 //计算年龄
-function birthday($birthday){ 
-    $age = strtotime($birthday); 
-    if($age == false){ 
-        return false; 
+function birthday($birthday)
+{
+    $age = strtotime($birthday);
+    if ($age == false) {
+        return false;
     }
-    list($y1,$m1,$d1) = explode("-",date("Y-m-d",$age)); 
-    $now = strtotime("now"); 
-    list($y2,$m2,$d2) = explode("-",date("Y-m-d",$now)); 
-    $age = $y2 - $y1; 
-    if((int)($m2.$d2) < (int)($m1.$d1)) 
-        $age -= 1; 
-    return $age; 
-} 
+    list($y1, $m1, $d1) = explode("-", date("Y-m-d", $age));
+    $now = strtotime("now");
+    list($y2, $m2, $d2) = explode("-", date("Y-m-d", $now));
+    $age = $y2 - $y1;
+    if ((int)($m2.$d2) < (int)($m1.$d1)) $age -= 1;
+    return $age;
+}
 
 
 /* 采集 PLUS*/
-require  ("spider.function.php");
+require("spider.function.php");
