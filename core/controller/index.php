@@ -36,7 +36,7 @@ class index extends Base
                     $text_message = $member_model[$category['islook']]['modelname'];
                 }
 
-                var_dump($category['islook']);exit;
+                var_dump($member_model);exit;
                 $this->show_message('当前栏目只允许'.$text_message.'查看', 1, $callback);
             } else {
                 if ($this->member_info && $category['islook'] > 1 && $this->member_info['modelid'] != $category['islook']) {
