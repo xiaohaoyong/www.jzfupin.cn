@@ -29,9 +29,6 @@ class index extends Base
                 $this->show_message('当前栏目不存在');
             }
             $category['page'] = (int)$this->get('page') ? (int)$this->get('page') : 1;
-            var_dump($category['islook']);
-            var_dump($this->member_info);
-            exit;
             if ($category['islook'] && !$this->member_info) {
                 $text_message = '会员';
                 $callback = '/';
