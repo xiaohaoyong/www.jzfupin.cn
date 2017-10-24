@@ -41,6 +41,7 @@ abstract class Base
         $this->cookie = iaeweb::load_class('cookie');
         $this->session = iaeweb::load_class('session');
         $this->site_config = iaeweb::load_config('config');
+        echo 111;exit;
         $this->category_cache = get_cache('category');
         $this->content_model = get_cache('content_model');
         $this->member_info =  self::get_member_info();
