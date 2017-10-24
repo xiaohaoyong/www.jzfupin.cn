@@ -104,6 +104,7 @@ class models extends Admin {
 		$data    = $this->db->setTableName('model')->find($modelid);
 		if (empty($data)) $this->show_message('该模型不存在！');
 	    if ($this->post('submit')) {
+	        var_dump(123123);exit;
             $data = $this->post('data');
 			unset($data['tablename']);
  			if($this->typeid == 3 || $this->typeid == 4) {
